@@ -23,7 +23,13 @@
   - [命令行工具](#命令行工具)
   - [AI 与机器学习](#ai-与机器学习)
   - [好玩有趣](#好玩有趣)
+  - [实用工具](#实用工具)
+  - [编程语言与学习](#编程语言与学习)
+  - [数据与数据库](#数据与数据库)
 - [App](#-app)
+  - [效率工具](#效率工具)
+  - [开发工具](#开发工具-1)
+  - [娱乐生活](#娱乐生活)
 - [网页](#-网页)
 - [如何贡献](#-如何贡献)
 - [License](#-license)
@@ -41,6 +47,8 @@
 | [public-apis](https://github.com/public-apis/public-apis) | 免费开放的公共 API 集合 |
 | [developer-roadmap](https://github.com/kamranahmedse/developer-roadmap) | 开发者学习路线图 |
 | [build-your-own-x](https://github.com/codecrafters-io/build-your-own-x) | 通过自己动手造轮子来学习编程 |
+| [awesome-cheatsheets](https://github.com/LeCoupa/awesome-cheatsheets) | 常用编程语言的速查表合集 |
+| [30-seconds-of-code](https://github.com/Chalarangelo/30-seconds-of-code) | 30 秒学会一个代码片段 |
 
 ### 命令行工具
 
@@ -50,6 +58,10 @@
 | [fzf](https://github.com/junegunn/fzf) | 命令行模糊查找器，效率神器 |
 | [ripgrep](https://github.com/BurntSushi/ripgrep) | 极速的正则搜索工具，比 grep 更快 |
 | [tldr](https://github.com/tldr-pages/tldr) | 简化的 man 手册，快速上手命令 |
+| [bat](https://github.com/sharkdp/bat) | 带语法高亮的 cat 替代品 |
+| [exa/eza](https://github.com/eza-community/eza) | 更现代、更好看的 ls 替代品 |
+| [cheat](https://github.com/cheat/cheat) | 命令行速查表，告别死记硬背 |
+| [fd](https://github.com/sharkdp/fd) | 更简单更快的 find 替代品 |
 
 ### AI 与机器学习
 
@@ -59,6 +71,12 @@
 | [stable-diffusion-webui](https://github.com/AUTOMATIC1111/stable-diffusion-webui) | Stable Diffusion 的 WebUI，AI 绘画必备 |
 | [LangChain](https://github.com/langchain-ai/langchain) | 构建 LLM 应用的开源框架 |
 | [AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | 自主运行的 AI 智能体 |
+| [ollama](https://github.com/ollama/ollama) | 本地一键运行大语言模型 |
+| [ComfyUI](https://github.com/comfyanonymous/ComfyUI) | 节点式工作流的 AI 绘画工具 |
+| [whisper](https://github.com/openai/whisper) | OpenAI 开源的语音识别模型 |
+| [dify](https://github.com/langgenius/dify) | 开源的 LLM 应用开发平台 |
+| [gpt4free](https://github.com/xtekky/gpt4free) | 逆向工程实现的免费大模型 API 集合 |
+| [open-interpreter](https://github.com/OpenInterpreter/open-interpreter) | 让 AI 通过自然语言操作你的电脑 |
 
 ### 好玩有趣
 
@@ -66,20 +84,87 @@
 | --- | --- |
 | [nocodb](https://github.com/nocodb/nocodb) | 开源的 Airtable 替代品，把数据库变成表格 |
 | [gitea](https://github.com/go-gitea/gitea) | 轻量级自托管 Git 服务 |
-| [gpt4free](https://github.com/xtekky/gpt4free) | 逆向工程实现的免费大模型 API 集合 |
 | [mermaid](https://github.com/mermaid-js/mermaid) | 用文本生成图表的工具，画图界的 Markdown |
+| [howtheysre](https://github.com/upgundecha/howtheysre) | 一份实用指南，提供关于构建、维护和运营生产级系统的技术及实践示例 |
+| [nocode](https://github.com/kelseyhightower/nocode) | 最好的无代码编程方式（一个有趣的项目） |
+| [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting) | 为 Zsh 提供鱼壳风格的语法高亮 |
+| [the-art-of-command-line](https://github.com/jlevy/the-art-of-command-line) | 一份关于掌握命令行技巧的指南 |
+| [shellcheck](https://github.com/koalaman/shellcheck) | 一个用于识别和修复 shell 脚本常见错误的静态分析工具 |
+| [awesome-selfhosted](https://github.com/awesome-selfhosted/awesome-selfhosted) | 一份自托管应用的清单，可以替代主流云服务 |
+| [project-based-learning](https://github.com/practical-tutorials/project-based-learning) | 通过项目实践学习编程的教程清单 |
+| [free-programming-books](https://github.com/EbookFoundation/free-programming-books) | 一份免费的编程书籍和资源清单 |
+| [chinese-independent-developer](https://github.com/1c7/chinese-independent-developer) | 独立开发者出海资源与技术栈合集 |
 
 > ⚠️ 说明：以上条目为**初始占位内容**，后续可结合社区推荐持续替换、补充。
+
+### 实用工具
+
+| 项目 | 简介 |
+| --- | --- |
+| [yt-dlp](https://github.com/yt-dlp/yt-dlp) | 强大的命令行视频下载神器，支持数千个网站 |
+| [FFmpeg](https://github.com/FFmpeg/FFmpeg) | 音视频处理的瑞士军刀 |
+| [ImageMagick](https://github.com/ImageMagick/ImageMagick) | 命令行图像处理与转换工具 |
+| [aria2](https://github.com/aria2/aria2) | 轻量高效的多协议命令行下载工具 |
+| [Syncthing](https://github.com/syncthing/syncthing) | 开源的点对点文件同步工具 |
+| [Starship](https://github.com/starship/starship) | 极速、可定制的跨 Shell 提示符 |
+| [AppImage](https://github.com/AppImage/AppImageKit) | 让 Linux 应用一次打包处处运行 |
+| [ffmpeg.wasm](https://github.com/ffmpegwasm/ffmpeg.wasm) | 在浏览器里运行的 FFmpeg |
+
+### 编程语言与学习
+
+| 项目 | 简介 |
+| --- | --- |
+| [The Algorithms](https://github.com/TheAlgorithms/Python) | 用多种语言实现算法与数据结构的百科 |
+| [javascript-algorithms](https://github.com/trekhleb/javascript-algorithms) | 带解释的 JavaScript 算法与数据结构 |
+| [hello-algo](https://github.com/krahets/hello-algo) | 动画图解、配套代码的一本数据结构和算法入门书 |
+| [system-design-primer](https://github.com/donnemartin/system-design-primer) | 学习如何设计大规模系统的入门指南 |
+| [computer-science](https://github.com/ossu/computer-science) | 免费的计算机科学自学课程体系 |
+| [coding-interview-university](https://github.com/jwasham/coding-interview-university) | 一份系统的编程面试自学计划 |
+| [leetcode](https://github.com/azl397985856/leetcode) | 用 JavaScript 与 Python 刷 LeetCode 的题解 |
+
+### 数据与数据库
+
+| 项目 | 简介 |
+| --- | --- |
+| [sqlite](https://github.com/sqlite/sqlite) | 全球使用最广泛的开源嵌入式数据库 |
+| [Redis](https://github.com/redis/redis) | 开源的内存数据结构存储，缓存之王 |
+| [ClickHouse](https://github.com/ClickHouse/ClickHouse) | 面向分析的列式开源数据库 |
+| [Airbyte](https://github.com/airbytehq/airbyte) | 开源的数据集成平台 |
+| [Airflow](https://github.com/apache/airflow) | 开源的工作流编排与调度平台 |
+| [duckdb](https://github.com/duckdb/duckdb) | 进程内分析型数据库，查询飞快的 DuckDB |
+| [lottie-web](https://github.com/airbnb/lottie-web) | 在 Web 上渲染 After Effects 动画 |
 
 ---
 
 ## 📱 App
 
+### 效率工具
+
 | 名称 | 平台 | 简介 |
 | --- | --- | --- |
 | [VS Code](https://code.visualstudio.com/) | Win / macOS / Linux | 微软出品的免费开源代码编辑器 |
 | [Obsidian](https://obsidian.md/) | Win / macOS / Linux / iOS / Android | 本地优先的双链笔记应用 |
+| [Notion](https://www.notion.so/) | 全平台 | 集笔记、文档、数据库于一体的协作工具 |
 | [Flutter](https://flutter.dev/) | 跨平台 | Google 的跨平台 UI 开发框架 |
+| [Docker Desktop](https://www.docker.com/products/docker-desktop/) | Win / macOS / Linux | 容器化应用的图形化管理工具 |
+| [Warp](https://www.warp.dev/) | Win / macOS / Linux | 现代 AI 驱动的终端 |
+
+### 开发工具
+
+| 名称 | 平台 | 简介 |
+| --- | --- | --- |
+| [Postman](https://www.postman.com/) | Win / macOS / Linux | 最流行的 API 调试与测试工具 |
+| [DevToys](https://github.com/DevToys-app/DevToys) | Win / macOS | 开发者工具箱，一站式搞定常见小工具 |
+| [Insomnia](https://insomnia.rest/) | Win / macOS / Linux | 开源免费的 API 客户端 |
+| [Figma](https://www.figma.com/) | Web / Win / macOS | 团队协作的 UI 设计工具 |
+
+### 娱乐生活
+
+| 名称 | 平台 | 简介 |
+| --- | --- | --- |
+| [PotPlayer](https://potplayer.daum.net/) | Win | 功能强大的本地视频播放器 |
+| [Everything](https://www.voidtools.com/) | Win | 秒级搜索本地文件的效率神器 |
+| [uTools](https://www.u.tools/) | Win / macOS | 可扩展的效率工具，快捷键启动一切 |
 
 ---
 
@@ -90,6 +175,15 @@
 | [Excalidraw](https://excalidraw.com/) | 手绘风格的在线白板与图表工具 |
 | [Carbon](https://carbon.now.sh/) | 把代码生成漂亮的分享图片 |
 | [Roadmap.sh](https://roadmap.sh/) | 在线开发者学习路线图 |
+| [Ray.so](https://ray.so/) | 生成精美的代码截图与主题配色 |
+| [Remove.bg](https://www.remove.bg/) | 一键在线抠图，AI 自动识别背景 |
+| [CloudConvert](https://cloudconvert.com/) | 在线文件格式转换工具箱 |
+| [TinyPNG](https://tinypng.com/) | 在线图片压缩，智能无损优化 |
+| [Regex101](https://regex101.com/) | 在线正则表达式测试与调试 |
+| [JSON.cn](https://www.json.cn/) | 在线 JSON 格式化与校验工具 |
+| [crontab.guru](https://crontab.guru/) | Cron 表达式可视化编辑与解释 |
+| [Asciinema](https://asciinema.org/) | 终端录屏分享，可嵌入网页 |
+| [OverAPI](https://overapi.com/) | 常用编程语言的 API 速查索引 |
 
 ---
 
@@ -103,6 +197,8 @@
    ```
 
 3. 提交 **PR**，或直接提 **Issue** 推荐你喜欢的项目 🎉
+
+详细的规范请参阅 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ---
 
