@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Hub · 知识库</title>
+  <meta name="description" content="整理各种知识的 Hub —— C++ / ROS / ROS2 学习与速查中心">
+  <link rel="icon" href="https://cnb.cool/frankwang98/awesome_hub/-/raw/main/_media/favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1/themes/prism-tomorrow.css">
+</head>
+<body>
+  <div id="app">加载中，请稍候…</div>
+
+  <!-- docsify -->
+  <script>
+    window.$docsify = {
+      name: 'Awesome Hub',
+      nameLink: '/',
+      repo: 'https://cnb.cool/frankwang98/awesome_hub',
+      loadSidebar: true,
+      subMaxLevel: 3,
+      search: {
+        placeholder: '搜索知识',
+        noData: '没有找到结果',
+        depth: 3
+      },
+      maxLevel: 4,
+      auto2top: true,
+      coverpage: false,
+      notFoundPage: '_404.md',
+      themeColor: '#4c9aff',
+      // 供 CNB 静态站点部署时使用（相对路径，保证子路径下资源可用）
+      basePath: '/',
+      formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}'
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docsify@4/lib/plugins/search.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-yaml.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+</body>
+</html>

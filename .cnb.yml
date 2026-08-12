@@ -1,0 +1,32 @@
+$:
+  push:
+    - name: build-docsify-site
+      docker:
+        image: node:20
+      stages:
+        # 校验 Markdown 文档引用与侧边栏导航是否完整
+        - name: check-links
+          script: |
+            node .ci/check_links.js
+        # 组装静态站点产物（docsify 为纯静态，直接拷贝）
+        - name: build-site
+          script: |
+            rm -rf site
+            mkdir -p site
+            cp -r index.html _sidebar.md _404.md _media README.md about.md awesome.md apps.md CONTRIBUTING.md LICENSE docs site/
+            echo "站点构建完成，输出目录: site/"
+            ls -la site/
+
+  # 手动/按钮触发部署：将构建好的 site/ 打包为可发布制品
+  web_trigger:
+    - name: package-site
+      docker:
+        image: node:20
+      stages:
+        - name: package
+          script: |
+            echo "打包静态站点制品..."
+            tar -czf site.tar.gz -C site . 2>/dev/null || \
+            tar -czf site.tar.gz index.html _sidebar.md _404.md _media README.md about.md awesome.md apps.md CONTRIBUTING.md LICENSE docs
+            ls -la site.tar.gz
+            echo "制品 site.tar.gz 已生成，可推送到任意静态托管平台（GitHub Pages / Cloudflare Pages / Vercel / 腾讯云 COS 等）"
