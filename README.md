@@ -23,6 +23,7 @@
 | --- | --- |
 | [🚀 C++ 知识库](docs/cpp/README.md) | 基础语法、面向对象、内存、STL、现代 C++、编译工具链、并发、书单资源 |
 | [🤖 ROS / ROS2 知识库](docs/ros2/README.md) | 架构与核心概念、工作空间、话题/服务/动作、TF、URDF、Launch、ROS1 对比、资源 |
+| [🚗 自动驾驶知识库](docs/autonomous-driving/README.md) | 规划控制（搜索/轨迹/控制）、工程实践、感知流程概览、端到端概览 |
 | [🔖 精选 GitHub 仓库](awesome.md) | 各类有趣、好用的开源仓库收藏 |
 | [📱 工具与 App](apps.md) | 效率工具、开发工具与网页工具 |
 | [🌍 网页端部署](docs/deploy.md) | 一键发布为在线站点的部署指南 |

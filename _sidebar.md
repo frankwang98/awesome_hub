@@ -21,6 +21,19 @@
   - [Launch 启动文件](docs/ros2/launch.md)
   - [ROS1 vs ROS2](docs/ros2/ros1-vs-ros2.md)
   - [学习资源导航](docs/ros2/resources.md)
+- **🚗 自动驾驶知识库**
+  - [🚗 自动驾驶总览](docs/autonomous-driving/README.md)
+  - 🧭 **规划控制（核心）**
+    - [规划总览](docs/autonomous-driving/planning.md)
+    - [搜索算法](docs/autonomous-driving/search-algorithms.md)
+    - [轨迹生成](docs/autonomous-driving/trajectory-generation.md)
+    - [控制](docs/autonomous-driving/control.md)
+  - 🛠️ **工程实践**
+    - [工程架构与工具链](docs/autonomous-driving/engineering.md)
+  - 👁️ **感知（大体流程）**
+    - [感知流程概览](docs/autonomous-driving/perception-overview.md)
+  - 🤖 **端到端（大体流程）**
+    - [端到端流程概览](docs/autonomous-driving/end-to-end.md)
 - **🔖 收藏清单**
   - [精选 GitHub 仓库](awesome.md)
   - [工具与 App](apps.md)
