@@ -10,6 +10,7 @@
 | --- | --- | --- |
 | **🚀 C++** | 基础语法、面向对象、内存管理、STL、现代 C++、编译工具链、并发、书单资源 | [C++ 知识库](docs/cpp/README.md) |
 | **🤖 ROS / ROS2** | 架构与核心概念、工作空间构建、话题/服务/动作、TF、URDF、Launch、ROS1 对比、学习资源 | [ROS/ROS2 知识库](docs/ros2/README.md) |
+| **🧠 具身智能** | VLA、世界模型、机器人学习、仿真与 Sim2Real、实机部署 | [具身智能知识库](docs/embodied-ai/README.md) |
 
 ## 规划中的方向
 

@@ -1,39 +1,47 @@
-- [🏠 首页](https://frankwang98.asia/awesome_hub/#/)
-- [📖 关于本 Hub](https://frankwang98.asia/awesome_hub/#/about)
-- [🌍 网页端部署](https://frankwang98.asia/awesome_hub/#/docs/deploy)
+- <a href="/awesome_hub/#/">🏠 首页</a>
+- <a href="/awesome_hub/#/about">📖 关于本 Hub</a>
+- <a href="/awesome_hub/#/docs/deploy">🌍 网页端部署</a>
 - **🚀 C++ 知识库**
-  - [C++ 概览与学习路线](https://frankwang98.asia/awesome_hub/#/docs/cpp/)
-  - [基础语法速查](https://frankwang98.asia/awesome_hub/#/docs/cpp/basics)
-  - [面向对象编程](https://frankwang98.asia/awesome_hub/#/docs/cpp/oop)
-  - [内存与指针](https://frankwang98.asia/awesome_hub/#/docs/cpp/memory)
-  - [STL 标准库](https://frankwang98.asia/awesome_hub/#/docs/cpp/stl)
-  - [现代 C++（11/14/17/20）](https://frankwang98.asia/awesome_hub/#/docs/cpp/modern)
-  - [编译与构建工具](https://frankwang98.asia/awesome_hub/#/docs/cpp/toolchain)
-  - [并发与多线程](https://frankwang98.asia/awesome_hub/#/docs/cpp/concurrency)
-  - [精选书单与资源](https://frankwang98.asia/awesome_hub/#/docs/cpp/resources)
+  - <a href="/awesome_hub/#/docs/cpp/">C++ 概览与学习路线</a>
+  - <a href="/awesome_hub/#/docs/cpp/basics">基础语法速查</a>
+  - <a href="/awesome_hub/#/docs/cpp/oop">面向对象编程</a>
+  - <a href="/awesome_hub/#/docs/cpp/memory">内存与指针</a>
+  - <a href="/awesome_hub/#/docs/cpp/stl">STL 标准库</a>
+  - <a href="/awesome_hub/#/docs/cpp/modern">现代 C++（11/14/17/20）</a>
+  - <a href="/awesome_hub/#/docs/cpp/toolchain">编译与构建工具</a>
+  - <a href="/awesome_hub/#/docs/cpp/concurrency">并发与多线程</a>
+  - <a href="/awesome_hub/#/docs/cpp/resources">精选书单与资源</a>
 - **🤖 ROS / ROS2 知识库**
-  - [ROS/ROS2 概览](https://frankwang98.asia/awesome_hub/#/docs/ros2/)
-  - [ROS2 核心概念](https://frankwang98.asia/awesome_hub/#/docs/ros2/concepts)
-  - [工作空间与构建](https://frankwang98.asia/awesome_hub/#/docs/ros2/workspace)
-  - [话题 · 服务 · 动作](https://frankwang98.asia/awesome_hub/#/docs/ros2/tsa)
-  - [TF 坐标变换](https://frankwang98.asia/awesome_hub/#/docs/ros2/tf)
-  - [URDF 与建模](https://frankwang98.asia/awesome_hub/#/docs/ros2/urdf)
-  - [Launch 启动文件](https://frankwang98.asia/awesome_hub/#/docs/ros2/launch)
-  - [ROS1 vs ROS2](https://frankwang98.asia/awesome_hub/#/docs/ros2/ros1-vs-ros2)
-  - [学习资源导航](https://frankwang98.asia/awesome_hub/#/docs/ros2/resources)
+  - <a href="/awesome_hub/#/docs/ros2/">ROS/ROS2 概览</a>
+  - <a href="/awesome_hub/#/docs/ros2/concepts">ROS2 核心概念</a>
+  - <a href="/awesome_hub/#/docs/ros2/workspace">工作空间与构建</a>
+  - <a href="/awesome_hub/#/docs/ros2/tsa">话题 · 服务 · 动作</a>
+  - <a href="/awesome_hub/#/docs/ros2/tf">TF 坐标变换</a>
+  - <a href="/awesome_hub/#/docs/ros2/urdf">URDF 与建模</a>
+  - <a href="/awesome_hub/#/docs/ros2/launch">Launch 启动文件</a>
+  - <a href="/awesome_hub/#/docs/ros2/ros1-vs-ros2">ROS1 vs ROS2</a>
+  - <a href="/awesome_hub/#/docs/ros2/resources">学习资源导航</a>
 - **🚗 自动驾驶知识库**
-  - [🚗 自动驾驶总览](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/)
+  - <a href="/awesome_hub/#/docs/autonomous-driving/">🚗 自动驾驶总览</a>
   - 🧭 **规划控制（核心）**
-    - [规划总览](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/planning)
-    - [搜索算法](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/search-algorithms)
-    - [轨迹生成](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/trajectory-generation)
-    - [控制](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/control)
+    - <a href="/awesome_hub/#/docs/autonomous-driving/planning">规划总览</a>
+    - <a href="/awesome_hub/#/docs/autonomous-driving/search-algorithms">搜索算法</a>
+    - <a href="/awesome_hub/#/docs/autonomous-driving/trajectory-generation">轨迹生成</a>
+    - <a href="/awesome_hub/#/docs/autonomous-driving/control">控制</a>
   - 🛠️ **工程实践**
-    - [工程架构与工具链](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/engineering)
+    - <a href="/awesome_hub/#/docs/autonomous-driving/engineering">工程架构与工具链</a>
   - 👁️ **感知（大体流程）**
-    - [感知流程概览](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/perception-overview)
+    - <a href="/awesome_hub/#/docs/autonomous-driving/perception-overview">感知流程概览</a>
   - 🤖 **端到端（大体流程）**
-    - [端到端流程概览](https://frankwang98.asia/awesome_hub/#/docs/autonomous-driving/end-to-end)
+  - <a href="/awesome_hub/#/docs/autonomous-driving/end-to-end">端到端流程概览</a>
+- **🧠 具身智能知识库**
+  - <a href="/awesome_hub/#/docs/embodied-ai/">总览与学习路线</a>
+  - <a href="/awesome_hub/#/docs/embodied-ai/foundations">基础与系统框架</a>
+  - <a href="/awesome_hub/#/docs/embodied-ai/perception">感知与表征</a>
+  - <a href="/awesome_hub/#/docs/embodied-ai/vla">Vision-Language-Action（VLA）</a>
+  - <a href="/awesome_hub/#/docs/embodied-ai/planning-control">任务规划与控制</a>
+  - <a href="/awesome_hub/#/docs/embodied-ai/simulation-data">仿真、数据与 Sim2Real</a>
+  - <a href="/awesome_hub/#/docs/embodied-ai/deployment-evaluation">部署与评测</a>
 - **🔖 收藏清单**
-  - [精选 GitHub 仓库](https://frankwang98.asia/awesome_hub/#/awesome)
-  - [工具与 App](https://frankwang98.asia/awesome_hub/#/apps)
+  - <a href="/awesome_hub/#/awesome">精选 GitHub 仓库</a>
+  - <a href="/awesome_hub/#/apps">工具与 App</a>
