@@ -1,4 +1,4 @@
-- [🏠 首页](/)
+- [🏠 首页](README.md)
 - [📖 关于本 Hub](about.md)
 - [🌍 网页端部署](docs/deploy.md)
 - **🚀 C++ 知识库**
