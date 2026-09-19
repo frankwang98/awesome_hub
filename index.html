@@ -16,7 +16,7 @@
   <script>
     window.$docsify = {
       name: 'Awesome Hub',
-      nameLink: '/',
+      nameLink: './',
       repo: 'https://github.com/frankwang98/awesome_hub',
       loadSidebar: true,
       subMaxLevel: 3,
@@ -30,8 +30,8 @@
       coverpage: false,
       notFoundPage: '_404.md',
       themeColor: '#4c9aff',
-      // 供 CNB 静态站点部署时使用（相对路径，保证子路径下资源可用）
-      basePath: '/',
+      // 使用相对路径，确保部署在 /awesome_hub/ 等子路径时加载本站内容。
+      basePath: './',
       formatUpdated: '{YYYY}/{MM}/{DD} {HH}:{mm}'
     }
   </script>
