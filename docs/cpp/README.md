@@ -13,6 +13,8 @@
 | [现代 C++（11/14/17/20）](modern.md) | auto、lambda、移动语义、智能指针、并发、模板进阶 |
 | [编译与构建工具](toolchain.md) | 编译流程、g++/clang、CMake、Makefile、包管理 |
 | [并发与多线程](concurrency.md) | 线程、互斥锁、条件变量、原子操作、异步 |
+| [工程实践与常用库](engineering-practice.md) | CMake、日志、配置、测试、网络与机器人/桌面工程选型 |
+| [C++ 库与资源索引](library-catalog.md) | 从 devfrank_cpp 迁入的常用库、框架与学习资源目录 |
 | [精选书单与资源](resources.md) | 经典书籍、在线教程、开源项目 |
 
 ---

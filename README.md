@@ -2,7 +2,7 @@
 
 # Awesome Hub 🌟
 
-> **整理各种知识的 Hub** —— 系统沉淀 C++、ROS/ROS2 等领域的知识，持续生长中～
+> **面向机器人与 AI 工程实践的技术技能知识库** —— 系统沉淀 C++、ROS2、自动驾驶与具身智能知识。
 
 ![Awesome](https://cdn.jsdelivr.net/gh/sindresorhus/awesome@main/media/badge.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
@@ -11,7 +11,7 @@
 
 </div>
 
-欢迎来到 **Awesome Hub**！这里不再只是一份收藏清单，而是一个**不断生长的知识整理中心**——把分散的文档、博客、书籍和开源项目中的知识，系统化地沉淀下来，方便随时查阅、速查与分享。
+欢迎来到 **Awesome Hub**！这里是一个持续维护的**技术技能知识库**：把学习笔记、工程经验、旧 Wiki / CSDN 文章和项目实践，逐步整理成可检索、可验证、可更新的知识体系。
 
 🔗 [在线阅读 Awesome Hub](https://frankwang98.asia/awesome_hub/)　| 🌐 [我的个人网站](https://frankwang98.asia/)
 
@@ -27,10 +27,12 @@
 | [🤖 ROS / ROS2 知识库](docs/ros2/README.md) | 架构与核心概念、工作空间、话题/服务/动作、TF、URDF、Launch、ROS1 对比、资源 |
 | [🚗 自动驾驶知识库](docs/autonomous-driving/README.md) | 规划控制（搜索/轨迹/控制）、工程实践、感知流程概览、端到端概览 |
 | [🧠 具身智能知识库](docs/embodied-ai/README.md) | VLA、世界模型、机器人学习、仿真与 Sim2Real、实机部署 |
+| [🗃️ 历史文章归档](docs/legacy/README.md) | 旧 Wiki 与 CSDN 文章原文，保留历史经验并逐步复核迁移 |
 | [🔖 精选 GitHub 仓库](awesome.md) | 各类有趣、好用的开源仓库收藏 |
 | [📱 工具与 App](apps.md) | 效率工具、开发工具与网页工具 |
 | [🌍 网页端部署](docs/deploy.md) | 一键发布为在线站点的部署指南 |
 | [📖 关于本 Hub](about.md) | Hub 定位、规划方向与贡献方式 |
+| [🔄 内容维护规范](docs/maintenance.md) | 时效状态、版本信息、来源和复核流程 |
 
 ---
 
@@ -42,6 +44,14 @@
 - 深度学习与 AI 应用
 - 具身智能与机器人基础模型
 - 工程实践（CMake、Git、CI/CD）
+
+## 🔄 内容状态
+
+- **主线内容**：已经整理进当前知识体系，持续更新。
+- **待复核内容**：知识仍有价值，但版本、命令或链接需要重新验证。
+- **历史归档**：完整保留旧 Wiki / CSDN 原文，避免知识和写作历史丢失。
+
+具体约定见 [内容维护规范](docs/maintenance.md)。
 
 ---
 

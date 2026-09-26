@@ -8,6 +8,7 @@
 | --- | --- | --- |
 | 🧭 **规划控制**（核心） | [规划总览](planning.md)、[搜索算法](search-algorithms.md)、[轨迹生成](trajectory-generation.md)、[控制](control.md) | ⭐⭐⭐ 重点、系统化 |
 | 🛠️ **工程实践** | [工程架构](engineering.md) | ⭐⭐⭐ 重点、贴近落地 |
+| 🛠️ **平台与仿真** | [平台、仿真与迁移策略](platforms-and-simulation.md) | ⭐⭐ Apollo / Autoware / ROS1→ROS2 / CARLA / Gazebo |
 | 👁️ **感知**（大体流程） | [感知流程概览](perception-overview.md) | ⭐ 总览流程，不细分 |
 | 🤖 **端到端**（大体流程） | [端到端流程概览](end-to-end.md) | ⭐ 总览流程 |
 
@@ -97,6 +98,7 @@ graph LR
   - [控制（PID/Pure Pursuit/MPC…）](control.md)
 - 🛠️ **工程实践**
   - [工程架构与工具链](engineering.md)
+  - [平台、仿真与迁移策略](platforms-and-simulation.md)
 - 👁️ **感知（大体流程）**
   - [感知流程概览](perception-overview.md)
 - 🤖 **端到端（大体流程）**

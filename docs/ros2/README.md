@@ -13,6 +13,7 @@
 | [URDF 与建模](urdf.md) | 机器人模型描述、URDF 标签 |
 | [Launch 启动文件](launch.md) | 多节点启动、参数传递 |
 | [ROS1 vs ROS2](ros1-vs-ros2.md) | 两大版本差异与迁移 |
+| [工程实践：通信、传感器与仿真](field-practice.md) | QoS、时间同步、传感器、点云、仿真与实车边界 |
 | [学习资源导航](resources.md) | 官方文档、教程、社区 |
 
 ---
