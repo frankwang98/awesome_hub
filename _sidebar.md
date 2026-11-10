@@ -54,61 +54,61 @@
   - <a href="/awesome_hub/#/docs/legacy/">旧 Wiki / CSDN 文章</a>
 
 - **📚 通识教育**
-- <a href="/awesome_hub/#/docs/education/">🧭 知识地图</a>
-- <a href="/awesome_hub/#/docs/education/maintenance">🛠️ 内容维护</a>
-- <a href="/awesome_hub/#/docs/education/project-roadmap">📍 建设路线</a>
-- **🗣️ Language 语言**
-  - <a href="/awesome_hub/#/docs/education/language/chinese/">Chinese 语文</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/curriculum">语文全学段地图</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/roadmap">语文学习路径</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/reading-argument">现代文阅读：从信息到观点</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/classical-poetry">古诗词阅读</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/classics/">古诗文篇目与精讲</a>
-    - <a href="/awesome_hub/#/docs/education/language/chinese/classics/curriculum-catalog">课程标准篇目目录</a>
-    - <a href="/awesome_hub/#/docs/education/language/chinese/classics/jingyesi">《静夜思》精讲</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/practice">语文练习与解析</a>
-  - <a href="/awesome_hub/#/docs/education/language/chinese/practice-lab">Chinese Practice · 互动练习</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/">English 英语</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/curriculum">英语全学段地图</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/roadmap">英语学习路径</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/sentence-core">英语句子的主干</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/tenses">英语时态</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/practice">英语练习与解析</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/practice-lab">English Practice · 互动练习</a>
-  - <a href="/awesome_hub/#/docs/education/language/english/basic-english-850">Ogden Basic English 850</a>
-- **📐 Mathematics 数学**
-  - <a href="/awesome_hub/#/docs/education/mathematics/">数学知识地图</a>
-  - <a href="/awesome_hub/#/docs/education/mathematics/curriculum">数学全学段地图</a>
-  - <a href="/awesome_hub/#/docs/education/mathematics/roadmap">数学学习路径</a>
-  - <a href="/awesome_hub/#/docs/education/mathematics/fractions-percent">分数、比例与百分数</a>
-  - <a href="/awesome_hub/#/docs/education/mathematics/functions">函数：理解变化的语言</a>
-  - <a href="/awesome_hub/#/docs/education/mathematics/practice">数学练习与解析</a>
-- **🔬 Science 科学**
-  - <a href="/awesome_hub/#/docs/education/science/">科学知识地图</a>
-  - <a href="/awesome_hub/#/docs/education/science/physics/">Physics 物理</a>
-  - <a href="/awesome_hub/#/docs/education/science/chemistry/">Chemistry 化学</a>
-  - <a href="/awesome_hub/#/docs/education/science/biology/">Biology 生物</a>
-- **🏛️ Humanities 人文**
-  - <a href="/awesome_hub/#/docs/education/humanities/">人文知识地图</a>
-  - <a href="/awesome_hub/#/docs/education/humanities/history/">History 历史</a>
-  - <a href="/awesome_hub/#/docs/education/humanities/geography/">Geography 地理</a>
-  - <a href="/awesome_hub/#/docs/education/humanities/literature/">Literature 文学</a>
-  - <a href="/awesome_hub/#/docs/education/humanities/philosophy/">Philosophy 哲学</a>
-  - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/">中国传统思想与易学</a>
-    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/yin-yang-wuxing">阴阳与五行</a>
-    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/stems-branches">天干地支与历法</a>
-    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/yijing-bagua">周易与八卦</a>
-    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/daoism">道家思想</a>
-    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/liuqin-shishen">六亲与十神</a>
-- **🌍 General Knowledge 通识**
-  - <a href="/awesome_hub/#/docs/education/general/">通识知识地图</a>
-  - <a href="/awesome_hub/#/docs/education/general/economics/">Economics 经济</a>
-  - <a href="/awesome_hub/#/docs/education/general/law/">Law 法律</a>
-  - <a href="/awesome_hub/#/docs/education/general/society/">Society 社会</a>
-  - <a href="/awesome_hub/#/docs/education/general/art/">Art 艺术</a>
-  - <a href="/awesome_hub/#/docs/education/general/life/">Life 生活</a>
-- **🎓 Learning 学习方法**
-  - <a href="/awesome_hub/#/docs/education/learning/">学习路径与复习</a>
-  - <a href="/awesome_hub/#/docs/education/learning/adult-foundations">成年人基础重建路线</a>
-  - <a href="/awesome_hub/#/docs/education/learning/practice-and-review">学习、练习与复习</a>
-  - <a href="/awesome_hub/#/docs/education/templates/knowledge-note">知识条目模板</a>
+  - <a href="/awesome_hub/#/docs/education/">🧭 知识地图</a>
+  - <a href="/awesome_hub/#/docs/education/maintenance">🛠️ 内容维护</a>
+  - <a href="/awesome_hub/#/docs/education/project-roadmap">📍 建设路线</a>
+  - **🗣️ Language 语言**
+    - <a href="/awesome_hub/#/docs/education/language/chinese/">Chinese 语文</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/curriculum">语文全学段地图</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/roadmap">语文学习路径</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/reading-argument">现代文阅读：从信息到观点</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/classical-poetry">古诗词阅读</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/classics/">古诗文篇目与精讲</a>
+      - <a href="/awesome_hub/#/docs/education/language/chinese/classics/curriculum-catalog">课程标准篇目目录</a>
+      - <a href="/awesome_hub/#/docs/education/language/chinese/classics/jingyesi">《静夜思》精讲</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/practice">语文练习与解析</a>
+    - <a href="/awesome_hub/#/docs/education/language/chinese/practice-lab">Chinese Practice · 互动练习</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/">English 英语</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/curriculum">英语全学段地图</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/roadmap">英语学习路径</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/sentence-core">英语句子的主干</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/tenses">英语时态</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/practice">英语练习与解析</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/practice-lab">English Practice · 互动练习</a>
+    - <a href="/awesome_hub/#/docs/education/language/english/basic-english-850">Ogden Basic English 850</a>
+  - **📐 Mathematics 数学**
+    - <a href="/awesome_hub/#/docs/education/mathematics/">数学知识地图</a>
+    - <a href="/awesome_hub/#/docs/education/mathematics/curriculum">数学全学段地图</a>
+    - <a href="/awesome_hub/#/docs/education/mathematics/roadmap">数学学习路径</a>
+    - <a href="/awesome_hub/#/docs/education/mathematics/fractions-percent">分数、比例与百分数</a>
+    - <a href="/awesome_hub/#/docs/education/mathematics/functions">函数：理解变化的语言</a>
+    - <a href="/awesome_hub/#/docs/education/mathematics/practice">数学练习与解析</a>
+  - **🔬 Science 科学**
+    - <a href="/awesome_hub/#/docs/education/science/">科学知识地图</a>
+    - <a href="/awesome_hub/#/docs/education/science/physics/">Physics 物理</a>
+    - <a href="/awesome_hub/#/docs/education/science/chemistry/">Chemistry 化学</a>
+    - <a href="/awesome_hub/#/docs/education/science/biology/">Biology 生物</a>
+  - **🏛️ Humanities 人文**
+    - <a href="/awesome_hub/#/docs/education/humanities/">人文知识地图</a>
+    - <a href="/awesome_hub/#/docs/education/humanities/history/">History 历史</a>
+    - <a href="/awesome_hub/#/docs/education/humanities/geography/">Geography 地理</a>
+    - <a href="/awesome_hub/#/docs/education/humanities/literature/">Literature 文学</a>
+    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/">Philosophy 哲学</a>
+    - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/">中国传统思想与易学</a>
+      - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/yin-yang-wuxing">阴阳与五行</a>
+      - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/stems-branches">天干地支与历法</a>
+      - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/yijing-bagua">周易与八卦</a>
+      - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/daoism">道家思想</a>
+      - <a href="/awesome_hub/#/docs/education/humanities/philosophy/chinese-tradition/liuqin-shishen">六亲与十神</a>
+  - **🌍 General Knowledge 通识**
+    - <a href="/awesome_hub/#/docs/education/general/">通识知识地图</a>
+    - <a href="/awesome_hub/#/docs/education/general/economics/">Economics 经济</a>
+    - <a href="/awesome_hub/#/docs/education/general/law/">Law 法律</a>
+    - <a href="/awesome_hub/#/docs/education/general/society/">Society 社会</a>
+    - <a href="/awesome_hub/#/docs/education/general/art/">Art 艺术</a>
+    - <a href="/awesome_hub/#/docs/education/general/life/">Life 生活</a>
+  - **🎓 Learning 学习方法**
+    - <a href="/awesome_hub/#/docs/education/learning/">学习路径与复习</a>
+    - <a href="/awesome_hub/#/docs/education/learning/adult-foundations">成年人基础重建路线</a>
+    - <a href="/awesome_hub/#/docs/education/learning/practice-and-review">学习、练习与复习</a>
+    - <a href="/awesome_hub/#/docs/education/templates/knowledge-note">知识条目模板</a>

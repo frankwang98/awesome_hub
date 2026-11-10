@@ -38,6 +38,34 @@
 
 ---
 
+## 📂 目录结构
+
+```text
+awesome_hub/
+├── README.md                 # 统一站点首页
+├── _sidebar.md               # 技术与通识导航
+├── index.html                # Docsify 入口
+├── docs/
+│   ├── cpp/                  # C++
+│   ├── ros2/                 # ROS / ROS2
+│   ├── autonomous-driving/   # 自动驾驶
+│   ├── embodied-ai/          # 具身智能
+│   ├── legacy/               # 历史文章
+│   └── education/            # 原 Education Hub 通识内容
+│       ├── language/         # 语文与英语
+│       ├── mathematics/      # 数学
+│       ├── science/          # 科学
+│       ├── humanities/       # 人文
+│       ├── general/          # 经济、法律、社会、艺术与生活
+│       ├── learning/         # 学习方法
+│       └── templates/        # 知识条目模板
+└── apps/
+    ├── chinese/              # 古诗词复习与默写
+    └── english/              # 词汇、语法、造句与 Basic 850
+```
+
+Education Hub 已作为通识教育板块并入本站，文档、练习应用、题库与来源说明均在本仓库维护。
+
 ## 🌱 规划中的知识方向
 
 - Python / 算法与数据结构
