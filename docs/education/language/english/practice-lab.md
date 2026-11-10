@@ -2,7 +2,7 @@
 
 > 把知识条目中的“看懂”变成能回忆、能造句、能说出口的练习。
 
-<a href="./apps/english/" target="_self">打开 English Practice →</a>
+<a href="/awesome_hub/apps/english/" target="_self">打开 English Practice →</a>
 
 ## 模块内容
 

@@ -14,7 +14,8 @@
 ├── about.md          # 关于
 ├── awesome.md        # 仓库收藏
 ├── apps.md           # 工具收藏
-└── docs/             # 知识库文档（C++ / ROS2）
+├── apps/             # 语文与英语互动练习
+└── docs/             # 技术工程与通识教育文档
 ```
 
 > docsify 无需构建，把整个仓库文件直接上传即可作为站点运行。
@@ -25,10 +26,10 @@
 
 1. 将本仓库推送到 GitHub。
 2. 进入仓库 **Settings → Pages**。
-3. **Source** 选择 `Deploy from a branch`，分支选择 `main`，目录选择 `/ (root)`。
-4. 保存后即可通过 `https://<你的用户名>.github.io/awesome_hub/` 访问。
+3. **Source** 选择 `GitHub Actions`，使用仓库已有的 `.github/workflows/static.yml`。
+4. 推送到 `main` 或手动触发工作流，部署成功后即可通过 `https://<你的用户名>.github.io/awesome_hub/` 访问。
 
-> 💡 docsify 官方推荐用此方式，无需编译、秒级发布。
+> 工作流直接上传仓库静态文件，无需编译。
 
 ## 方式二：Cloudflare Pages（免费）
 
@@ -43,30 +44,19 @@
 2. **Framework Preset** 选择 `Other`，Build Command 留空，Output Directory 留空。
 3. 自动获取域名并部署。
 
-## 方式四：CNB 流水线自动打包（本项目已配置）
+## 方式四：对象存储 / CDN（腾讯云 COS / 阿里云 OSS）
 
-项目已内置 `.cnb.yml` 流水线，可在 CNB 页面**手动触发**，将静态站点打包为 `site.tar.gz` 制品，方便推送到任意对象存储或 CDN：
-
-```yaml
-# 已在 .cnb.yml 中配置 web_trigger 事件
-# 在 CNB 仓库页面 -> 流水线 -> 手动触发 -> "package-site"
-```
-
-触发后生成的 `site.tar.gz` 即为可发布的静态站点压缩包。
-
-## 方式五：对象存储 / CDN（腾讯云 COS / 阿里云 OSS）
-
-1. 将 `site/` 目录（或 `site.tar.gz` 解压后）上传到 COS/OSS 桶。
+1. 将站点文件（包括 `docs/`、`apps/` 和 `.nojekyll`）上传到 COS/OSS 桶。
 2. 开启**静态网站托管**功能，绑定域名即可。
 
 ---
 
 ## 部署清单
 
-- [x] `index.html` 使用相对路径，可部署在子目录
+- [x] 当前站点与导航配置使用 `/awesome_hub/`；变更部署路径时需同步调整
 - [x] `_sidebar.md`、`_404.md`、`_media/` 齐全
 - [x] 内置搜索、代码高亮（C++/Bash/YAML/Python）
-- [x] 链接校验脚本 `.ci/check_links.js`（CI 自动运行）
+- [x] 链接校验脚本 `.ci/check_links.js`（可手动执行 `node .ci/check_links.js`）
 
 ---
 

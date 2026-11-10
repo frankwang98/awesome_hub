@@ -1,4 +1,5 @@
 - <a href="/awesome_hub/#/">🏠 首页</a>
+- <a href="/awesome_hub/#/docs/education/">📚 通识教育 · Education Hub</a>
 - <a href="/awesome_hub/#/about">📖 关于本 Hub</a>
 - <a href="/awesome_hub/#/docs/maintenance">🔄 内容维护规范</a>
 - <a href="/awesome_hub/#/docs/deploy">🌍 网页端部署</a>
@@ -53,7 +54,7 @@
 - **🗃️ 历史归档**
   - <a href="/awesome_hub/#/docs/legacy/">旧 Wiki / CSDN 文章</a>
 
-- **📚 通识教育**
+- **📚 通识教育 · 学科导航**
   - <a href="/awesome_hub/#/docs/education/">🧭 知识地图</a>
   - <a href="/awesome_hub/#/docs/education/maintenance">🛠️ 内容维护</a>
   - <a href="/awesome_hub/#/docs/education/project-roadmap">📍 建设路线</a>

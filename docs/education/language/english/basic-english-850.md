@@ -2,7 +2,7 @@
 
 > 一份英语学习史上的经典词表，也是检查自己基础表达能力的一个小型里程碑。
 
-<a href="./apps/english/basic-850.html" target="_self">打开 Basic English 850 自测 →</a>
+<a href="/awesome_hub/apps/english/basic-850.html" target="_self">打开 Basic English 850 自测 →</a>
 
 ## 它是什么
 

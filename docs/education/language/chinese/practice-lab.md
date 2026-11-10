@@ -2,7 +2,7 @@
 
 > 语文的练习不是只对答案：背诵、理解、阅读和表达应当形成同一个循环。
 
-<a href="./apps/chinese/" target="_self">打开古诗词复习与默写 →</a>
+<a href="/awesome_hub/apps/chinese/" target="_self">打开古诗词复习与默写 →</a>
 
 ## 当前模块：古诗词复习与默写
 
