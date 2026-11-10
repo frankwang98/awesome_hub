@@ -79,3 +79,7 @@ docs: 新增 C++ 内存管理知识点
 - 重复或错误内容会被修正或合并
 
 感谢每一位贡献者 ❤️
+
+## 通识教育与练习应用
+
+通识文档位于 `docs/education/`，练习应用位于 `apps/chinese/` 和 `apps/english/`。写作遵循[通识教育贡献规范](docs/education/CONTRIBUTING.md)与[内容维护要求](docs/education/maintenance.md)。迁入内容保留 MIT 许可，题库与第三方材料须保留随附来源和许可声明。

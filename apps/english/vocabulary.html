@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英语词汇 2000</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --bg-card: #ffffff;
+    --text: #2a2a2a;
+    --text-muted: #6b6b6b;
+    --accent: #2e7d5b;
+    --accent-light: #e8f5ee;
+    --border: #e5e5e0;
+    --code-bg: #f4f4ee;
+    --shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  [data-theme="dark"] {
+    --bg: #1a1a1a;
+    --bg-card: #242424;
+    --text: #e8e8e8;
+    --text-muted: #a0a0a0;
+    --accent: #5cb88a;
+    --accent-light: #2a3a30;
+    --border: #383838;
+    --code-bg: #2a2a2a;
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.7;
+    transition: background 0.3s, color 0.3s;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  
+  /* 侧边栏 */
+  .sidebar {
+    width: 280px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar h1 {
+    font-size: 18px;
+    color: var(--accent);
+    margin: 0 0 8px 0;
+  }
+  .sidebar .sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .hub-link { color: var(--accent); font-size: 12px; text-decoration: none; display: inline-block; margin: 0 0 10px; }
+  .hub-link:hover { text-decoration: underline; }
+  .toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc li { margin: 4px 0; }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+  }
+  .toc a:hover {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+  }
+  .toc .h3 { padding-left: 20px; font-size: 13px; color: var(--text-muted); }
+  .toc .h4 { padding-left: 32px; font-size: 12px; color: var(--text-muted); }
+  
+  /* 工具栏 */
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .toolbar button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+  .toolbar button.active { background: var(--accent); color: white; border-color: var(--accent); }
+  
+  /* 进度 */
+  .progress {
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--accent-light);
+    border-radius: 6px;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s;
+  }
+  .progress-text {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 4px;
+    font-weight: bold;
+  }
+  
+  /* 主内容 */
+  .main {
+    flex: 1;
+    padding: 40px 60px;
+    max-width: 900px;
+  }
+  h1, h2, h3, h4 {
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 28px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+  h2 { font-size: 22px; color: var(--accent); margin-top: 40px; }
+  h3 { font-size: 18px; }
+  h4 { font-size: 16px; color: var(--text-muted); }
+  p { margin: 12px 0; }
+  blockquote {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 16px 0;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.9em;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+  
+  /* 词汇块 */
+  .vocab-block {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .vocab-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 0;
+  }
+  .vocab-line .en { flex: 1; }
+  .vocab-line.review-mode .en { 
+    filter: blur(5px);
+    transition: filter 0.3s;
+  }
+  .vocab-line.review-mode:hover .en { filter: none; }
+  
+  /* 列表项 */
+  .list-item, .sub-item {
+    padding: 4px 0;
+    margin: 2px 0;
+  }
+  .sub-item {
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  
+  /* 例句 */
+  .example-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .example-line .en-text {
+    flex: 1;
+    color: var(--text);
+  }
+  .example-line .cn-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+  .example-line.review-mode .en-text {
+    filter: blur(5px);
+    transition: filter 0.3s;
+  }
+  .example-line.review-mode:hover .en-text { filter: none; }
+  
+  /* 朗读按钮 */
+  .tts-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tts-btn:hover { transform: scale(1.1); }
+  .tts-btn.playing { background: #d97706; }
+  
+  /* 章节标记 */
+  h2, h3 {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  h2::before, h3::before {
+    content: '▼';
+    position: absolute;
+    left: -20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+  h2.collapsed::before, h3.collapsed::before {
+    transform: rotate(-90deg);
+  }
+  
+  /* 复习模式 */
+  body.review-mode .vocab-line .en,
+  body.review-mode .example-line .en-text {
+    filter: blur(5px);
+    transition: filter 0.3s;
+  }
+  body.review-mode .vocab-line:hover .en,
+  body.review-mode .example-line:hover .en-text {
+    filter: none;
+  }
+  
+  /* 已学标记 */
+  h2.checked {
+    opacity: 0.6;
+  }
+  h2.checked::after {
+    content: ' ✓';
+    color: var(--accent);
+  }
+  
+  /* 移动端 */
+  @media (max-width: 768px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; }
+    .main { padding: 20px; }
+  }
+
+  .know-btn {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    border-radius: 50%;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-left: 4px;
+    transition: all 0.2s;
+  }
+  .know-btn:hover { transform: scale(1.1); }
+  .know-btn[data-state="known"] {
+    background: var(--success, #16a34a);
+    color: white;
+    border-color: var(--success, #16a34a);
+  }
+  .know-btn[data-state="unknown"] {
+    background: var(--danger, #dc2626);
+    color: white;
+    border-color: var(--danger, #dc2626);
+  }
+  .vocab-line.known { opacity: 0.45; }
+  .vocab-line.known .en { text-decoration: line-through; }
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    margin: 16px 0;
+    flex-wrap: wrap;
+    padding: 12px;
+    background: var(--accent-light);
+    border-radius: 8px;
+  }
+  .filter-bar button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .filter-bar button.active { background: var(--accent); color: white; border-color: var(--accent); }
+  .vocab-block.hidden { display: none; }
+
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="hub-link" href="../../#/docs/education/language/english/practice-lab">← Awesome Hub · 通识教育</a>
+    <h1>📚 英语词汇 2000</h1>
+    <div class="sub">English Practice · Awesome Hub · 通识教育</div>
+    
+    <div class="toolbar">
+      <button id="review-toggle" title="遮住英文，看中文回忆">👁️ 复习模式</button>
+      <button id="dark-toggle">🌙 深色</button>
+      <button id="tts-all">▶️ 朗读本页</button>
+    </div>
+    
+    <ul class="toc">
+      <li><a href="#500" data-target="500">第一部分：最高频 500 词（必须先掌握）</a></li>
+<li><a href="#1-pronouns" data-target="1-pronouns">1. 人称与代词 (Pronouns)</a></li>
+<li><a href="#2-top-verbs" data-target="2-top-verbs">2. 常用动词 (Top Verbs)</a></li>
+<li><a href="#3-top-nouns" data-target="3-top-nouns">3. 常用名词 (Top Nouns)</a></li>
+<li><a href="#4-top-adjectives" data-target="4-top-adjectives">4. 常用形容词 (Top Adjectives)</a></li>
+<li><a href="#5-adverbs-connectors" data-target="5-adverbs-connectors">5. 常用副词与连接词 (Adverbs & Connectors)</a></li>
+<li><a href="#6-prepositions" data-target="6-prepositions">6. 常用介词 (Prepositions)</a></li>
+<li><a href="#7-question-words" data-target="7-question-words">7. 常用疑问词 (Question Words)</a></li>
+<li><a href="#1500" data-target="1500">第二部分：场景必备词汇 (1500 词)</a></li>
+<li><a href="#1" data-target="1">场景 1：日常打招呼与寒暄</a></li>
+<li><a href="#2" data-target="2">场景 2：家庭与朋友</a></li>
+<li><a href="#3" data-target="3">场景 3：饮食与餐厅</a></li>
+<li><a href="#4" data-target="4">场景 4：购物与金钱</a></li>
+<li><a href="#5" data-target="5">场景 5：交通与出行</a></li>
+<li><a href="#6" data-target="6">场景 6：工作与学习</a></li>
+<li><a href="#7" data-target="7">场景 7：时间与日期</a></li>
+<li><a href="#8" data-target="8">场景 8：天气与季节</a></li>
+<li><a href="#9" data-target="9">场景 9：健康与身体</a></li>
+<li><a href="#10" data-target="10">场景 10：情感与表达</a></li>
+<li><a href="#200" data-target="200">第三部分：高频短句（200 句脱口而出）</a></li>
+<li><a href="#" data-target="">起始对话</a></li>
+<li><a href="#" data-target="">表示同意 / 不同意</a></li>
+<li><a href="#" data-target="">请求与建议</a></li>
+<li><a href="#" data-target="">表达感受</a></li>
+<li><a href="#" data-target="">表达需求</a></li>
+<li><a href="#" data-target="">日常问题</a></li>
+<li><a href="#" data-target="">电话交流</a></li>
+<li><a href="#" data-target="">表达感谢与道歉</a></li>
+<li><a href="#" data-target="">学习方法</a></li>
+<li><a href="#1-2-500" data-target="1-2-500">第 1-2 周：最高频 500 词</a></li>
+<li><a href="#3-4" data-target="3-4">第 3-4 周：场景词汇</a></li>
+<li><a href="#5" data-target="5">第 5 周起：高频短句</a></li>
+<li><a href="#" data-target="">检验标准</a></li>
+<li><a href="#" data-target="">听力材料推荐（按级别）</a></li>
+    </ul>
+    
+    <div class="progress">
+      <div class="progress-label">学习进度</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text">0 / 0</div>
+    </div>
+  </aside>
+  
+  <main class="main">
+
+<div class="filter-bar">
+  <button class="filter-btn active" data-filter="all">📚 全部</button>
+  <button class="filter-btn" data-filter="unknown">❌ 不会（重点复习）</button>
+  <button class="filter-btn" data-filter="known">✓ 已掌握</button>
+  <button class="filter-btn" data-filter="review">🔄 错词循环</button>
+</div>
+
+    <h1 id="2000" class="h1">实用英语核心词汇 (2000 词精简版)</h1>
+<blockquote>目标：掌握这 2000 词 + 短句，能听懂 80% 日常对话，能说出 80% 想表达的内容。</blockquote>
+<blockquote>学法：每天 15-20 词，配合听说场景例句朗读。</blockquote>
+<hr>
+<h2 id="500" class="h2">第一部分：最高频 500 词（必须先掌握）</h2>
+<p>这些词占日常英语出现率的 70% 以上。先把这些练到"听音秒懂、说话秒出"。</p>
+<h3 id="1-pronouns" class="h3">1. 人称与代词 (Pronouns)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="I 我 | you 你 | he 他 | she 她 | it 它 | we 我们 | they 他们">🔊</button><span class="en">I 我 | you 你 | he 他 | she 她 | it 它 | we 我们 | they 他们</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="me 我（宾格）| him 他（宾格）| her 她（宾格）| us 我们（宾格）| them 他们（宾格）">🔊</button><span class="en">me 我（宾格）| him 他（宾格）| her 她（宾格）| us 我们（宾格）| them 他们（宾格）</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="my 我的 | your 你的 | his 他的 | her 她的 | its 它的 | our 我们的 | their 他们的">🔊</button><span class="en">my 我的 | your 你的 | his 他的 | her 她的 | its 它的 | our 我们的 | their 他们的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="myself 我自己 | yourself 你自己 | himself 他自己 | herself 她自己">🔊</button><span class="en">myself 我自己 | yourself 你自己 | himself 他自己 | herself 她自己</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="this 这 | that 那 | these 这些 | those 那些">🔊</button><span class="en">this 这 | that 那 | these 这些 | those 那些</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<p><strong>场景短句（跟读 10 遍）：</strong></p>
+<div class="example-line"><span class="en-text">This is my friend, and that is her sister.</span><button class="tts-btn" data-text="This is my friend, and that is her sister.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">They told me about themselves.</span><button class="tts-btn" data-text="They told me about themselves.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="2-top-verbs" class="h3">2. 常用动词 (Top Verbs)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="be 是 | have 有 | do 做 | go 去 | get 得到 | make 做/制造 | take 拿/带">🔊</button><span class="en">be 是 | have 有 | do 做 | go 去 | get 得到 | make 做/制造 | take 拿/带</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="come 来 | see 看见 | know 知道 | think 思考 | say 说 | tell 告诉 | give 给">🔊</button><span class="en">come 来 | see 看见 | know 知道 | think 思考 | say 说 | tell 告诉 | give 给</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="find 找到 | want 想要 | use 使用 | work 工作 | call 叫/打电话 | try 尝试">🔊</button><span class="en">find 找到 | want 想要 | use 使用 | work 工作 | call 叫/打电话 | try 尝试</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="ask 问 | need 需要 | feel 感觉 | leave 离开 | put 放 | mean 意思是">🔊</button><span class="en">ask 问 | need 需要 | feel 感觉 | leave 离开 | put 放 | mean 意思是</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="keep 保持 | let 让 | begin 开始 | help 帮助 | start 开始 | show 展示">🔊</button><span class="en">keep 保持 | let 让 | begin 开始 | help 帮助 | start 开始 | show 展示</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="hear 听 | play 玩/播放 | run 跑 | move 移动 | live 住 | believe 相信">🔊</button><span class="en">hear 听 | play 玩/播放 | run 跑 | move 移动 | live 住 | believe 相信</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="bring 带来 | happen 发生 | write 写 | provide 提供 | sit 坐 | stand 站">🔊</button><span class="en">bring 带来 | happen 发生 | write 写 | provide 提供 | sit 坐 | stand 站</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="lose 失去 | pay 付钱 | meet 遇见 | include 包括 | continue 继续">🔊</button><span class="en">lose 失去 | pay 付钱 | meet 遇见 | include 包括 | continue 继续</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="learn 学 | change 改变 | lead 领导 | understand 理解 | watch 观看">🔊</button><span class="en">learn 学 | change 改变 | lead 领导 | understand 理解 | watch 观看</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="follow 跟随 | stop 停止 | create 创造 | speak 说 | read 读 | spend 花费">🔊</button><span class="en">follow 跟随 | stop 停止 | create 创造 | speak 说 | read 读 | spend 花费</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="grow 成长 | open 打开 | walk 走 | win 赢 | offer 提供 | remember 记得">🔊</button><span class="en">grow 成长 | open 打开 | walk 走 | win 赢 | offer 提供 | remember 记得</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="love 爱 | consider 考虑 | appear 出现 | buy 买 | serve 服务 | die 死">🔊</button><span class="en">love 爱 | consider 考虑 | appear 出现 | buy 买 | serve 服务 | die 死</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="send 发送 | expect 期待 | build 建造 | stay 停留 | fall 跌倒 | cut 切">🔊</button><span class="en">send 发送 | expect 期待 | build 建造 | stay 停留 | fall 跌倒 | cut 切</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="reach 到达 | kill 杀 | remain 保持 | suggest 建议 | raise 举起/养育">🔊</button><span class="en">reach 到达 | kill 杀 | remain 保持 | suggest 建议 | raise 举起/养育</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<h3 id="3-top-nouns" class="h3">3. 常用名词 (Top Nouns)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="time 时间 | year 年 | people 人 | way 方式 | day 天 | man 男人 | woman 女人">🔊</button><span class="en">time 时间 | year 年 | people 人 | way 方式 | day 天 | man 男人 | woman 女人</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="child 孩子 | world 世界 | life 生活 | hand 手 | part 部分 | place 地方">🔊</button><span class="en">child 孩子 | world 世界 | life 生活 | hand 手 | part 部分 | place 地方</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="case 情况 | week 周 | company 公司 | system 系统 | program 程序">🔊</button><span class="en">case 情况 | week 周 | company 公司 | system 系统 | program 程序</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="question 问题 | work 工作 | government 政府 | number 数字">🔊</button><span class="en">question 问题 | work 工作 | government 政府 | number 数字</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="night 夜 | point 点 | home 家 | water 水 | room 房间 | mother 妈妈">🔊</button><span class="en">night 夜 | point 点 | home 家 | water 水 | room 房间 | mother 妈妈</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="area 区域 | money 钱 | story 故事 | fact 事实 | month 月 | lot 许多">🔊</button><span class="en">area 区域 | money 钱 | story 故事 | fact 事实 | month 月 | lot 许多</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="right 右边/权利 | study 学习 | book 书 | eye 眼睛 | job 工作">🔊</button><span class="en">right 右边/权利 | study 学习 | book 书 | eye 眼睛 | job 工作</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="word 单词 | business 业务 | issue 问题 | side 边 | kind 种 | head 头">🔊</button><span class="en">word 单词 | business 业务 | issue 问题 | side 边 | kind 种 | head 头</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="house 房子 | service 服务 | friend 朋友 | father 父亲 | power 力量">🔊</button><span class="en">house 房子 | service 服务 | friend 朋友 | father 父亲 | power 力量</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="hour 小时 | game 游戏 | line 线 | end 结束 | member 成员">🔊</button><span class="en">hour 小时 | game 游戏 | line 线 | end 结束 | member 成员</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="law 法律 | car 车 | city 城市 | community 社区 | name 名字">🔊</button><span class="en">law 法律 | car 车 | city 城市 | community 社区 | name 名字</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="president 总统 | team 团队 | minute 分钟 | idea 想法 | body 身体">🔊</button><span class="en">president 总统 | team 团队 | minute 分钟 | idea 想法 | body 身体</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="information 信息 | back 后面 | parent 父母 | face 脸 | level 水平">🔊</button><span class="en">information 信息 | back 后面 | parent 父母 | face 脸 | level 水平</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<h3 id="4-top-adjectives" class="h3">4. 常用形容词 (Top Adjectives)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="good 好的 | new 新的 | first 第一 | last 最后 | long 长的 | great 伟大的">🔊</button><span class="en">good 好的 | new 新的 | first 第一 | last 最后 | long 长的 | great 伟大的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="little 小的 | own 自己的 | other 其他的 | old 老的 | right 正确的 | big 大的">🔊</button><span class="en">little 小的 | own 自己的 | other 其他的 | old 老的 | right 正确的 | big 大的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="high 高的 | different 不同的 | small 小的 | large 大的 | next 下一个">🔊</button><span class="en">high 高的 | different 不同的 | small 小的 | large 大的 | next 下一个</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="early 早的 | young 年轻的 | important 重要的 | few 少的 | public 公共的">🔊</button><span class="en">early 早的 | young 年轻的 | important 重要的 | few 少的 | public 公共的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="bad 坏的 | same 相同的 | able 能 | to 向/到 | free 自由的 | best 最好的">🔊</button><span class="en">bad 坏的 | same 相同的 | able 能 | to 向/到 | free 自由的 | best 最好的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="better 更好的 | true 真的 | sure 确定的 | real 真的 | whole 整个的">🔊</button><span class="en">better 更好的 | true 真的 | sure 确定的 | real 真的 | whole 整个的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="special 特别的 | easy 容易的 | clear 清楚的 | difficult 困难的">🔊</button><span class="en">special 特别的 | easy 容易的 | clear 清楚的 | difficult 困难的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="possible 可能的 | popular 流行的 | available 可用的 | common 普通的">🔊</button><span class="en">possible 可能的 | popular 流行的 | available 可用的 | common 普通的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="ready 准备好的 | simple 简单的 | left 左边的 | nice 好的">🔊</button><span class="en">ready 准备好的 | simple 简单的 | left 左边的 | nice 好的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<h3 id="5-adverbs-connectors" class="h3">5. 常用副词与连接词 (Adverbs & Connectors)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="not 不 | also 也 | very 很 | often 经常 | however 然而 | too 也/太">🔊</button><span class="en">not 不 | also 也 | very 很 | often 经常 | however 然而 | too 也/太</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="just 仅仅 | more 更多 | then 然后 | now 现在 | here 这里 | there 那里">🔊</button><span class="en">just 仅仅 | more 更多 | then 然后 | now 现在 | here 这里 | there 那里</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="when 当...时 | where 哪里 | why 为什么 | how 怎么 | what 什么 | which 哪个">🔊</button><span class="en">when 当...时 | where 哪里 | why 为什么 | how 怎么 | what 什么 | which 哪个</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="because 因为 | so 所以 | if 如果 | although 虽然 | while 当...时">🔊</button><span class="en">because 因为 | so 所以 | if 如果 | although 虽然 | while 当...时</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="before 在...前 | after 在...后 | until 直到 | since 自从">🔊</button><span class="en">before 在...前 | after 在...后 | until 直到 | since 自从</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="again 又 | once 一次 | ever 曾经 | never 从不 | always 总是 | sometimes 有时">🔊</button><span class="en">again 又 | once 一次 | ever 曾经 | never 从不 | always 总是 | sometimes 有时</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="usually 通常 | maybe 也许 | probably 可能 | actually 实际上">🔊</button><span class="en">usually 通常 | maybe 也许 | probably 可能 | actually 实际上</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="especially 特别 | probably 大概 | almost 几乎 | quite 相当">🔊</button><span class="en">especially 特别 | probably 大概 | almost 几乎 | quite 相当</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="together 一起 | alone 单独 | away 离开">🔊</button><span class="en">together 一起 | alone 单独 | away 离开</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<h3 id="6-prepositions" class="h3">6. 常用介词 (Prepositions)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="in 在...里 | on 在...上 | at 在...点 | to 向 | for 为了 | with 和...一起">🔊</button><span class="en">in 在...里 | on 在...上 | at 在...点 | to 向 | for 为了 | with 和...一起</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="from 来自 | about 关于 | as 作为 | into 进入 | like 像 | through 穿过">🔊</button><span class="en">from 来自 | about 关于 | as 作为 | into 进入 | like 像 | through 穿过</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="after 在...后 | over 在...上 | between 在...之间 | without 没有">🔊</button><span class="en">after 在...后 | over 在...上 | between 在...之间 | without 没有</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="under 在...下 | against 对抗 | among 在...之中 | during 在...期间">🔊</button><span class="en">under 在...下 | against 对抗 | among 在...之中 | during 在...期间</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="before 在...前 | since 自从 | until 直到 | by 通过 | within 在...内">🔊</button><span class="en">before 在...前 | since 自从 | until 直到 | by 通过 | within 在...内</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="across 横穿 | around 围绕 | near 靠近 | off 离开">🔊</button><span class="en">across 横穿 | around 围绕 | near 靠近 | off 离开</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<h3 id="7-question-words" class="h3">7. 常用疑问词 (Question Words)</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="who 谁 | what 什么 | where 哪里 | when 什么时候 | why 为什么 | how 怎么">🔊</button><span class="en">who 谁 | what 什么 | where 哪里 | when 什么时候 | why 为什么 | how 怎么</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="how much 多少（钱）| how many 多少（数量）| how long 多长 | how often 多频繁">🔊</button><span class="en">how much 多少（钱）| how many 多少（数量）| how long 多长 | how often 多频繁</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div><div class="vocab-line"><button class="tts-btn" data-text="which 哪个 | whose 谁的">🔊</button><span class="en">which 哪个 | whose 谁的</span><button class="know-btn" data-state="unknown" title="标记掌握状态">○</button></div></div>
+<hr>
+<h2 id="1500" class="h2">第二部分：场景必备词汇 (1500 词)</h2>
+<p>按生活场景分组，每组 100-200 词。</p>
+<h3 id="1" class="h3">场景 1：日常打招呼与寒暄</h3>
+<p><strong>打招呼：</strong></p>
+<div class="list-item">• Hello / Hi 你好</div>
+<div class="list-item">• Good morning 早上好</div>
+<div class="list-item">• Good afternoon 下午好</div>
+<div class="list-item">• Good evening 晚上好</div>
+<div class="example-line"><span class="en-text">How are you? 你好吗？</span><button class="tts-btn" data-text="How are you? 你好吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">How's it going? 最近怎么样？</span><button class="tts-btn" data-text="How&#x27;s it going? 最近怎么样？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">What's up? 怎么了？（口语）</span><button class="tts-btn" data-text="What&#x27;s up? 怎么了？（口语）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Long time no see. 好久不见。</span><button class="tts-btn" data-text="Long time no see. 好久不见。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Nice to meet you. 很高兴见到你。</span><button class="tts-btn" data-text="Nice to meet you. 很高兴见到你。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>回应：</strong></p>
+<div class="example-line"><span class="en-text">I'm fine, thank you. 我很好，谢谢。</span><button class="tts-btn" data-text="I&#x27;m fine, thank you. 我很好，谢谢。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm doing well. 我过得不错。</span><button class="tts-btn" data-text="I&#x27;m doing well. 我过得不错。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Not too bad. 还行。</span><button class="tts-btn" data-text="Not too bad. 还行。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Pretty good. 挺好的。</span><button class="tts-btn" data-text="Pretty good. 挺好的。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can't complain. 还行吧。</span><button class="tts-btn" data-text="Can&#x27;t complain. 还行吧。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>自我介绍：</strong></p>
+<div class="example-line"><span class="en-text">My name is... 我叫...</span><button class="tts-btn" data-text="My name is... 我叫...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm from... 我来自...</span><button class="tts-btn" data-text="I&#x27;m from... 我来自...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I work as... 我做...工作</span><button class="tts-btn" data-text="I work as... 我做...工作">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I study at... 我在...学习</span><button class="tts-btn" data-text="I study at... 我在...学习">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Nice to meet you. 很高兴认识你。</span><button class="tts-btn" data-text="Nice to meet you. 很高兴认识你。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">What do you do? 你是做什么的？</span><button class="tts-btn" data-text="What do you do? 你是做什么的？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Where are you from? 你是哪里人？</span><button class="tts-btn" data-text="Where are you from? 你是哪里人？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>道别：</strong></p>
+<div class="list-item">• Goodbye / Bye 再见</div>
+<div class="example-line"><span class="en-text">See you later. 待会儿见。</span><button class="tts-btn" data-text="See you later. 待会儿见。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">See you tomorrow. 明天见。</span><button class="tts-btn" data-text="See you tomorrow. 明天见。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Take care. 保重。</span><button class="tts-btn" data-text="Take care. 保重。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Have a nice day. 祝你今天愉快。</span><button class="tts-btn" data-text="Have a nice day. 祝你今天愉快。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Good night. 晚安。</span><button class="tts-btn" data-text="Good night. 晚安。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听+说训练：</strong> 听一句，暂停，重复一遍（影子跟读）：</p>
+<div class="example-line"><span class="en-text">"Hi, how's it going?"</span><button class="tts-btn" data-text="&quot;Hi, how&#x27;s it going?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I'm pretty good, and you?"</span><button class="tts-btn" data-text="&quot;I&#x27;m pretty good, and you?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I'm doing well, thanks for asking."</span><button class="tts-btn" data-text="&quot;I&#x27;m doing well, thanks for asking.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="2" class="h3">场景 2：家庭与朋友</h3>
+<p><strong>家庭成员：</strong></p>
+<div class="list-item">• family 家庭 | parents 父母 | father/dad 爸爸 | mother/mom 妈妈</div>
+<div class="list-item">• brother 兄弟 | sister 姐妹 | son 儿子 | daughter 女儿</div>
+<div class="list-item">• grandfather 爷爷 | grandmother 奶奶 | uncle 叔叔 | aunt 阿姨</div>
+<div class="list-item">• cousin 堂/表兄弟姐妹 | husband 丈夫 | wife 妻子</div>
+<p><strong>朋友：</strong></p>
+<div class="list-item">• friend 朋友 | best friend 最好的朋友 | classmate 同学</div>
+<div class="list-item">• colleague 同事 | neighbor 邻居 | partner 伴侣</div>
+<p><strong>描述外貌：</strong></p>
+<div class="list-item">• tall 高 | short 矮 | thin 瘦 | heavy 胖 | young 年轻 | old 年老</div>
+<div class="list-item">• hair 头发 | face 脸 | eyes 眼睛 | nose 鼻子 | mouth 嘴</div>
+<div class="list-item">• long hair 长发 | short hair 短发 | curly hair 卷发 | straight hair 直发</div>
+<p><strong>听+说训练：</strong></p>
+<div class="example-line"><span class="en-text">"I have two brothers and one sister."</span><button class="tts-btn" data-text="&quot;I have two brothers and one sister.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"My best friend lives next door."</span><button class="tts-btn" data-text="&quot;My best friend lives next door.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"She has long curly hair."</span><button class="tts-btn" data-text="&quot;She has long curly hair.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="3" class="h3">场景 3：饮食与餐厅</h3>
+<p><strong>食物分类：</strong></p>
+<div class="list-item">• breakfast 早餐 | lunch 午餐 | dinner 晚餐 | snack 零食</div>
+<div class="list-item">• meat 肉 | chicken 鸡肉 | beef 牛肉 | pork 猪肉 | fish 鱼</div>
+<div class="list-item">• vegetable 蔬菜 | fruit 水果 | rice 米饭 | noodles 面条 | bread 面包</div>
+<div class="list-item">• water 水 | tea 茶 | coffee 咖啡 | juice 果汁 | milk 牛奶</div>
+<div class="list-item">• cake 蛋糕 | cookie 饼干 | ice cream 冰淇淋</div>
+<p><strong>口味：</strong></p>
+<div class="list-item">• delicious 美味的 | tasty 好吃的 | sweet 甜的 | salty 咸的</div>
+<div class="list-item">• sour 酸的 | spicy 辣的 | bitter 苦的 | bland 淡的</div>
+<p><strong>餐厅用语：</strong></p>
+<div class="list-item">• menu 菜单 | order 点单 | bill/check 账单 | tip 小费</div>
+<div class="list-item">• waiter 服务生 | waitress 女服务生 | table 桌子 | reservation 预订</div>
+<div class="example-line"><span class="en-text">I'd like... 我想要...</span><button class="tts-btn" data-text="I&#x27;d like... 我想要...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can I have...? 我能要...吗？</span><button class="tts-btn" data-text="Can I have...? 我能要...吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">What do you recommend? 你推荐什么？</span><button class="tts-btn" data-text="What do you recommend? 你推荐什么？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm allergic to... 我对...过敏</span><button class="tts-btn" data-text="I&#x27;m allergic to... 我对...过敏">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's too salty. 太咸了。</span><button class="tts-btn" data-text="It&#x27;s too salty. 太咸了。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">The bill, please. 请结账。</span><button class="tts-btn" data-text="The bill, please. 请结账。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听+说训练：</strong></p>
+<div class="example-line"><span class="en-text">"What would you like to order?"</span><button class="tts-btn" data-text="&quot;What would you like to order?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I'd like a coffee and a sandwich, please."</span><button class="tts-btn" data-text="&quot;I&#x27;d like a coffee and a sandwich, please.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Can I have the bill, please?"</span><button class="tts-btn" data-text="&quot;Can I have the bill, please?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="4" class="h3">场景 4：购物与金钱</h3>
+<p><strong>购物地点：</strong></p>
+<div class="list-item">• store/shop 商店 | supermarket 超市 | market 市场 | mall 商场</div>
+<div class="list-item">• pharmacy 药店 | bookstore 书店 | clothing store 服装店</div>
+<p><strong>商品相关：</strong></p>
+<div class="list-item">• price 价格 | size 尺寸 | color 颜色 | brand 品牌</div>
+<div class="list-item">• cheap 便宜 | expensive 贵 | on sale 打折 | discount 折扣</div>
+<div class="list-item">• cash 现金 | credit card 信用卡 | change 零钱 | receipt 收据</div>
+<p><strong>购物对话：</strong></p>
+<div class="example-line"><span class="en-text">How much is it? 多少钱？</span><button class="tts-btn" data-text="How much is it? 多少钱？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's $20. 20 美元。</span><button class="tts-btn" data-text="It&#x27;s $20. 20 美元。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can I try it on? 我能试穿吗？</span><button class="tts-btn" data-text="Can I try it on? 我能试穿吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Do you have a smaller size? 有小一号的吗？</span><button class="tts-btn" data-text="Do you have a smaller size? 有小一号的吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'll take it. 我要了。</span><button class="tts-btn" data-text="I&#x27;ll take it. 我要了。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'd like to return this. 我想退这个。</span><button class="tts-btn" data-text="I&#x27;d like to return this. 我想退这个。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听+说训练：</strong></p>
+<div class="example-line"><span class="en-text">"Excuse me, how much is this shirt?"</span><button class="tts-btn" data-text="&quot;Excuse me, how much is this shirt?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"It's $30, but it's on sale today for $20."</span><button class="tts-btn" data-text="&quot;It&#x27;s $30, but it&#x27;s on sale today for $20.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Do you accept credit cards?"</span><button class="tts-btn" data-text="&quot;Do you accept credit cards?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="5" class="h3">场景 5：交通与出行</h3>
+<p><strong>交通工具：</strong></p>
+<div class="list-item">• car 汽车 | bus 公共汽车 | taxi/cab 出租车 | subway/metro 地铁</div>
+<div class="list-item">• train 火车 | airplane 飞机 | bicycle 自行车 | motorbike 摩托车</div>
+<p><strong>出行相关：</strong></p>
+<div class="list-item">• airport 机场 | station 车站 | stop 站点 | ticket 票</div>
+<div class="list-item">• platform 站台 | gate 登机口 | seat 座位 | luggage 行李</div>
+<div class="list-item">• left 左 | right 右 | straight 一直 | turn 转弯 | cross 过马路</div>
+<div class="list-item">• traffic light 红绿灯 | traffic jam 堵车 | map 地图 | GPS 导航</div>
+<p><strong>出行对话：</strong></p>
+<div class="example-line"><span class="en-text">Excuse me, where is...? 请问...在哪里？</span><button class="tts-btn" data-text="Excuse me, where is...? 请问...在哪里？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">How do I get to...? 我怎么去...？</span><button class="tts-btn" data-text="How do I get to...? 我怎么去...？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">How long does it take? 要多久？</span><button class="tts-btn" data-text="How long does it take? 要多久？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can you show me on the map? 你能在地图上指给我看吗？</span><button class="tts-btn" data-text="Can you show me on the map? 你能在地图上指给我看吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Is this the right bus for...? 这是去...的公交车吗？</span><button class="tts-btn" data-text="Is this the right bus for...? 这是去...的公交车吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'd like a ticket to... 我想买到...的票。</span><button class="tts-btn" data-text="I&#x27;d like a ticket to... 我想买到...的票。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听+说训练：</strong></p>
+<div class="example-line"><span class="en-text">"Excuse me, could you tell me how to get to the train station?"</span><button class="tts-btn" data-text="&quot;Excuse me, could you tell me how to get to the train station?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Take the number 5 bus and get off at the third stop."</span><button class="tts-btn" data-text="&quot;Take the number 5 bus and get off at the third stop.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"How long does it take to walk there?"</span><button class="tts-btn" data-text="&quot;How long does it take to walk there?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="6" class="h3">场景 6：工作与学习</h3>
+<p><strong>工作相关：</strong></p>
+<div class="list-item">• job 工作 | work 工作（动词）| company 公司 | office 办公室</div>
+<div class="list-item">• boss 老板 | manager 经理 | employee 员工 | colleague 同事</div>
+<div class="list-item">• meeting 会议 | project 项目 | deadline 截止日期 | report 报告</div>
+<div class="list-item">• salary 工资 | interview 面试 | resume 简历 | experience 经验</div>
+<div class="list-item">• work from home 在家工作 | overtime 加班 | vacation 假期</div>
+<p><strong>学习相关：</strong></p>
+<div class="list-item">• school 学校 | university 大学 | class 课 | course 课程</div>
+<div class="list-item">• teacher 老师 | student 学生 | homework 作业 | exam 考试</div>
+<div class="list-item">• grade 成绩 | subject 科目 | major 专业 | degree 学位</div>
+<div class="list-item">• learn 学习 | study 学习/研究 | practice 练习 | review 复习</div>
+<p><strong>对话短句：</strong></p>
+<div class="example-line"><span class="en-text">What do you do? 你做什么工作？</span><button class="tts-btn" data-text="What do you do? 你做什么工作？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I work as a... 我做...工作</span><button class="tts-btn" data-text="I work as a... 我做...工作">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I majored in... 我主修...</span><button class="tts-btn" data-text="I majored in... 我主修...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm looking for a job. 我在找工作。</span><button class="tts-btn" data-text="I&#x27;m looking for a job. 我在找工作。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can I ask you a question? 我能问个问题吗？</span><button class="tts-btn" data-text="Can I ask you a question? 我能问个问题吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Could you repeat that, please? 你能再说一遍吗？</span><button class="tts-btn" data-text="Could you repeat that, please? 你能再说一遍吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="7" class="h3">场景 7：时间与日期</h3>
+<p><strong>时间表达：</strong></p>
+<div class="example-line"><span class="en-text">What time is it? 几点了？</span><button class="tts-btn" data-text="What time is it? 几点了？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's 3 o'clock. 3 点钟。</span><button class="tts-btn" data-text="It&#x27;s 3 o&#x27;clock. 3 点钟。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's half past two. 2 点半。</span><button class="tts-btn" data-text="It&#x27;s half past two. 2 点半。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's a quarter to five. 差一刻 5 点（4:45）。</span><button class="tts-btn" data-text="It&#x27;s a quarter to five. 差一刻 5 点（4:45）。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>日期：</strong></p>
+<div class="list-item">• today 今天 | tomorrow 明天 | yesterday 昨天</div>
+<div class="list-item">• this week 这周 | next week 下周 | last week 上周</div>
+<div class="list-item">• this month 这个月 | next month 下个月 | last month 上个月</div>
+<div class="list-item">• this year 今年 | last year 去年 | next year 明年</div>
+<div class="list-item">• weekday 工作日 | weekend 周末 | holiday 假期</div>
+<div class="list-item">• Monday 周一 | Tuesday 周二 | Wednesday 周三 | Thursday 周四</div>
+<div class="list-item">• Friday 周五 | Saturday 周六 | Sunday 周日</div>
+<p><strong>常用时间短句：</strong></p>
+<div class="example-line"><span class="en-text">I'll see you at 5. 我 5 点见你。</span><button class="tts-btn" data-text="I&#x27;ll see you at 5. 我 5 点见你。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">What time works for you? 你什么时间方便？</span><button class="tts-btn" data-text="What time works for you? 你什么时间方便？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm running late. 我要迟到了。</span><button class="tts-btn" data-text="I&#x27;m running late. 我要迟到了。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I just arrived. 我刚到。</span><button class="tts-btn" data-text="I just arrived. 我刚到。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">See you in 10 minutes. 10 分钟后见。</span><button class="tts-btn" data-text="See you in 10 minutes. 10 分钟后见。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="8" class="h3">场景 8：天气与季节</h3>
+<p><strong>天气：</strong></p>
+<div class="list-item">• weather 天气 | sunny 晴朗 | cloudy 多云 | rainy 下雨</div>
+<div class="list-item">• snowy 下雪 | windy 刮风 | foggy 有雾 | hot 热 | warm 暖 | cool 凉快</div>
+<div class="list-item">• cold 冷 | humid 潮湿 | dry 干燥 | storm 暴风雨 | rainbow 彩虹</div>
+<div class="list-item">• temperature 温度 | degree 度 | forecast 预报</div>
+<p><strong>对话：</strong></p>
+<div class="example-line"><span class="en-text">What's the weather like? 天气怎么样？</span><button class="tts-btn" data-text="What&#x27;s the weather like? 天气怎么样？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's sunny today. 今天晴。</span><button class="tts-btn" data-text="It&#x27;s sunny today. 今天晴。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's going to rain tomorrow. 明天要下雨。</span><button class="tts-btn" data-text="It&#x27;s going to rain tomorrow. 明天要下雨。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It's pretty cold today. 今天挺冷。</span><button class="tts-btn" data-text="It&#x27;s pretty cold today. 今天挺冷。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">The weather is nice. 天气真好。</span><button class="tts-btn" data-text="The weather is nice. 天气真好。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="9" class="h3">场景 9：健康与身体</h3>
+<p><strong>身体部位：</strong></p>
+<div class="list-item">• head 头 | hair 头发 | face 脸 | eye 眼睛 | ear 耳朵 | nose 鼻子</div>
+<div class="list-item">• mouth 嘴 | tooth 牙齿 | neck 脖子 | shoulder 肩膀 | back 背</div>
+<div class="list-item">• arm 手臂 | hand 手 | finger 手指 | leg 腿 | foot 脚 | stomach 胃</div>
+<p><strong>身体状态：</strong></p>
+<div class="list-item">• healthy 健康的 | sick 生病的 | tired 累的 | hungry 饿的</div>
+<div class="list-item">• thirsty 渴的 | full 饱的 | sleepy 困的 | hurt 受伤的</div>
+<div class="list-item">• headache 头痛 | stomachache 胃痛 | fever 发烧 | cough 咳嗽</div>
+<div class="list-item">• cold 感冒 | flu 流感 | allergy 过敏</div>
+<p><strong>看医生对话：</strong></p>
+<div class="example-line"><span class="en-text">I don't feel well. 我不舒服。</span><button class="tts-btn" data-text="I don&#x27;t feel well. 我不舒服。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I have a headache. 我头痛。</span><button class="tts-btn" data-text="I have a headache. 我头痛。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I need to see a doctor. 我要看医生。</span><button class="tts-btn" data-text="I need to see a doctor. 我要看医生。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Where does it hurt? 哪里痛？</span><button class="tts-btn" data-text="Where does it hurt? 哪里痛？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Take this medicine three times a day. 这个药一天吃三次。</span><button class="tts-btn" data-text="Take this medicine three times a day. 这个药一天吃三次。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm allergic to penicillin. 我对青霉素过敏。</span><button class="tts-btn" data-text="I&#x27;m allergic to penicillin. 我对青霉素过敏。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="10" class="h3">场景 10：情感与表达</h3>
+<p><strong>情感词汇：</strong></p>
+<div class="list-item">• happy 开心 | sad 伤心 | angry 生气 | surprised 惊讶</div>
+<div class="list-item">• excited 兴奋 | bored 无聊 | tired 累 | relaxed 放松</div>
+<div class="list-item">• worried 担心 | nervous 紧张 | proud 骄傲 | grateful 感激</div>
+<div class="list-item">• confused 困惑 | disappointed 失望 | embarrassed 尴尬</div>
+<div class="list-item">• love 爱 | like 喜欢 | hate 讨厌 | miss 想念</div>
+<div class="list-item">• laugh 笑 | cry 哭 | smile 微笑 | shout 喊</div>
+<p><strong>表达观点：</strong></p>
+<div class="example-line"><span class="en-text">I think... 我觉得...</span><button class="tts-btn" data-text="I think... 我觉得...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I believe... 我相信...</span><button class="tts-btn" data-text="I believe... 我相信...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">In my opinion... 在我看来...</span><button class="tts-btn" data-text="In my opinion... 在我看来...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I agree. 我同意。</span><button class="tts-btn" data-text="I agree. 我同意。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I disagree. 我不同意。</span><button class="tts-btn" data-text="I disagree. 我不同意。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">That makes sense. 有道理。</span><button class="tts-btn" data-text="That makes sense. 有道理。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm not sure. 我不确定。</span><button class="tts-btn" data-text="I&#x27;m not sure. 我不确定。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">You're right. 你是对的。</span><button class="tts-btn" data-text="You&#x27;re right. 你是对的。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">That's a good point. 这是个好观点。</span><button class="tts-btn" data-text="That&#x27;s a good point. 这是个好观点。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="200" class="h2">第三部分：高频短句（200 句脱口而出）</h2>
+<h3 id="" class="h3">起始对话</h3>
+<p>1. How are you doing? 你怎么样？ 2. What have you been up to? 你最近在忙什么？ 3. How was your day? 今天怎么样？ 4. Long time no see! 好久不见！ 5. What are you up to this weekend? 这个周末你打算做什么？</p>
+<h3 id="" class="h3">表示同意 / 不同意</h3>
+<p>6. Exactly! 没错！ 7. That's so true. 太对了。 8. I totally agree. 我完全同意。 9. I'm not sure about that. 我不太确定。 10. I see what you mean, but... 我懂你的意思，但是... 11. That's a good point. 这是个好观点。 12. I couldn't agree more. 我完全同意。</p>
+<h3 id="" class="h3">请求与建议</h3>
+<p>13. Could you help me with this? 你能帮我吗？ 14. Would you mind if I...? 你介意我...吗？ 15. How about we go for a walk? 我们去散步怎么样？ 16. Why don't we try the new restaurant? 我们试试新餐厅吧？ 17. Let me know if you need anything. 需要什么跟我说。</p>
+<h3 id="" class="h3">表达感受</h3>
+<p>18. I'm so tired of this. 我受够这个了。 19. I'm really looking forward to it. 我很期待。 20. It drives me crazy. 让我抓狂。 21. I'm fed up with... 我对...受够了。 22. That's awesome! 太棒了！ 23. That's a shame. 真可惜。 24. I'm so excited! 我好兴奋！</p>
+<h3 id="" class="h3">表达需求</h3>
+<p>25. Can I have a moment? 我能占用你一点时间吗？ 26. Do you have a minute? 你有空吗？ 27. Could you speak slower, please? 你能说慢点吗？ 28. Could you repeat that? 你能再说一遍吗？ 29. What does this mean? 这是什么意思？ 30. How do you say this in English? 这个用英语怎么说？</p>
+<h3 id="" class="h3">日常问题</h3>
+<p>31. Where are you from? 你是哪里人？ 32. What do you do for a living? 你做什么工作？ 33. How old are you? 你多大了？ 34. Do you have any siblings? 你有兄弟姐妹吗？ 35. Are you married? 你结婚了吗？ 36. What are your hobbies? 你的爱好是什么？ 37. What's your favorite movie? 你最喜欢的电影是什么？ 38. Have you ever been to...? 你去过...吗？</p>
+<h3 id="" class="h3">电话交流</h3>
+<p>39. Hello, this is [name] speaking. 你好，我是 [名字]。 40. Is [name] there, please? [名字] 在吗？ 41. Can I take a message? 我能帮你带个口信吗？ 42. I'll call you back later. 我稍后回你电话。 43. Sorry, wrong number. 抱歉，打错了。</p>
+<h3 id="" class="h3">表达感谢与道歉</h3>
+<p>44. Thank you so much. 非常感谢。 45. I really appreciate it. 我很感激。 46. Sorry for the inconvenience. 抱歉带来不便。 47. My apologies. 我道歉。 48. Don't worry about it. 别放在心上。 49. No problem at all. 完全没问题。 50. You're welcome. 不客气。</p>
+<hr>
+<h2 id="" class="h2">学习方法</h2>
+<h3 id="1-2-500" class="h3">第 1-2 周：最高频 500 词</h3>
+<div class="list-item">• 每天 25 词，分 2 批（早 10、晚 15）</div>
+<div class="list-item">• 用 Anki 制作卡片：英文 → 中文 / 中文 → 英文</div>
+<div class="list-item">• 配短句朗读 5 遍</div>
+<h3 id="3-4" class="h3">第 3-4 周：场景词汇</h3>
+<div class="list-item">• 选 2-3 个你最常用的场景（比如工作 + 日常）</div>
+<div class="list-item">• 场景词汇配角色扮演：自己当 A，对方当 B</div>
+<h3 id="5" class="h3">第 5 周起：高频短句</h3>
+<div class="list-item">• 每天 5 句，<strong>不背，写 3 句自己的话用到这些句型</strong></div>
+<div class="list-item">• 找语伴或自己录音</div>
+<h3 id="" class="h3">检验标准</h3>
+<div class="list-item">• 看到词能秒反应中文</div>
+<div class="list-item">• 听到词能秒反应中文</div>
+<div class="list-item">• 用词造句 5 秒内能出口</div>
+<div class="list-item">• 短句听到能秒懂、能脱口而出</div>
+<h3 id="" class="h3">听力材料推荐（按级别）</h3>
+<div class="list-item">• <strong>入门</strong>：English with Lucy（YouTube）、BBC Learning English</div>
+<div class="list-item">• <strong>初中级</strong>：6 Minute English (BBC)、English in 10 Minutes（Podcast）</div>
+<div class="list-item">• <strong>中级</strong>：TED Talks Daily、All Ears English Podcast</div>
+<div class="list-item">• <strong>实战</strong>：The Daily（NYT）、自己喜欢的领域 YouTube 频道</div>
+  </main>
+</div>
+
+<script>
+// 复习模式
+const reviewBtn = document.getElementById('review-toggle');
+reviewBtn.addEventListener('click', () => {
+  document.body.classList.toggle('review-mode');
+  reviewBtn.classList.toggle('active');
+});
+
+// 深色模式
+const darkBtn = document.getElementById('dark-toggle');
+const themeKey = 'education-hub:english:vocabulary:theme';
+const legacyThemeKey = 'theme';
+const savedTheme = localStorage.getItem(themeKey) || localStorage.getItem(legacyThemeKey);
+if (!localStorage.getItem(themeKey) && savedTheme) localStorage.setItem(themeKey, savedTheme);
+if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+darkBtn.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  localStorage.setItem(themeKey, isDark ? 'light' : 'dark');
+  darkBtn.classList.toggle('active');
+});
+if (savedTheme === 'dark') darkBtn.classList.add('active');
+
+// TTS 朗读
+function speak(text, btn) {
+  if (!('speechSynthesis' in window)) {
+    alert('您的浏览器不支持朗读功能');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  if (btn) btn.classList.add('playing');
+  u.onend = u.onerror = () => { if (btn) btn.classList.remove('playing'); };
+  window.speechSynthesis.speak(u);
+}
+
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('tts-btn')) {
+    speak(e.target.dataset.text, e.target);
+  }
+});
+
+document.getElementById('tts-all').addEventListener('click', () => {
+  const all = document.querySelectorAll('.vocab-line .en, .example-line .en-text, .en-text, p');
+  let i = 0;
+  function next() {
+    if (i >= all.length) return;
+    const el = all[i++];
+    const text = el.textContent.trim();
+    if (text.length > 5 && text.length < 200) {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.9;
+      u.onend = next;
+      window.speechSynthesis.speak(u);
+    } else {
+      next();
+    }
+  }
+  next();
+});
+
+// 章节折叠
+document.querySelectorAll('h2, h3').forEach(h => {
+  h.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') return;
+    let next = h.nextElementSibling;
+    h.classList.toggle('collapsed');
+    const collapsed = h.classList.contains('collapsed');
+    while (next && !['H1','H2','H3'].includes(next.tagName)) {
+      next.style.display = collapsed ? 'none' : '';
+      next = next.nextElementSibling;
+    }
+  });
+});
+
+// 学习进度
+const sectionKey = 'education-hub:english:vocabulary:progress';
+const legacySectionKey = 'progress-/lemon_english/vocabulary.html';
+const savedProgress = localStorage.getItem(sectionKey) || localStorage.getItem(legacySectionKey) || '{}';
+if (!localStorage.getItem(sectionKey) && savedProgress !== '{}') localStorage.setItem(sectionKey, savedProgress);
+const saved = JSON.parse(savedProgress);
+const allH2 = document.querySelectorAll('h2');
+allH2.forEach(h => {
+  if (saved[h.id]) h.classList.add('checked');
+  h.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+    h.classList.toggle('checked');
+    const cur = JSON.parse(localStorage.getItem(sectionKey) || '{}');
+    cur[h.id] = h.classList.contains('checked');
+    localStorage.setItem(sectionKey, JSON.stringify(cur));
+    updateProgress();
+  });
+  h.title = '双击标记为已学';
+});
+
+function updateProgress() {
+  const total = allH2.length;
+  const done = document.querySelectorAll('h2.checked').length;
+  document.getElementById('progress-fill').style.width = (done/total*100) + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + total;
+}
+updateProgress();
+
+// 目录点击
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById(a.dataset.target);
+    if (target) {
+      target.classList.remove('collapsed');
+      let next = target.nextElementSibling;
+      while (next && !['H1','H2','H3'].includes(next.tagName)) {
+        next.style.display = '';
+        next = next.nextElementSibling;
+      }
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  });
+});
+
+// 键盘快捷键
+document.addEventListener('keydown', e => {
+  if (e.key === 'd' && !e.target.matches('input,textarea')) darkBtn.click();
+  if (e.key === 'r' && !e.target.matches('input,textarea')) reviewBtn.click();
+});
+</script>
+</body>
+</html>

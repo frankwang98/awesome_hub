@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Practice · Awesome Hub · 通识教育</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+    background: linear-gradient(135deg, #2e7d5b 0%, #1a4d3a 100%);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    color: #fff;
+  }
+  .container { max-width: 1000px; width: 100%; }
+  .hub-link {
+    display: inline-block;
+    color: rgba(255,255,255,0.88);
+    text-decoration: none;
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .hub-link:hover { color: #fff; text-decoration: underline; }
+  h1 { font-size: 36px; text-align: center; margin-bottom: 12px; }
+  .subtitle { text-align: center; opacity: 0.9; margin-bottom: 40px; font-size: 16px; }
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  .card {
+    background: rgba(255,255,255,0.95);
+    color: #2a2a2a;
+    border-radius: 16px;
+    padding: 28px;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+  .card .icon { font-size: 48px; margin-bottom: 12px; }
+  .card h2 { font-size: 20px; margin: 0 0 10px 0; color: #2e7d5b; }
+  .card p { color: #666; line-height: 1.6; margin: 0; font-size: 13px; }
+  .card .badge {
+    display: inline-block;
+    color: white;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-top: 10px;
+    background: #2e7d5b;
+  }
+  .card.highlight { background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); }
+  .card.highlight h2 { color: #d97706; }
+  .card.highlight .badge { background: #d97706; }
+  
+  .tips {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 20px 24px;
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .tips strong { color: #ffd54f; }
+  
+  @media (max-width: 900px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <a class="hub-link" href="../../#/docs/education/language/english/practice-lab">← 返回 Awesome Hub · 通识教育 · 英语学习</a>
+  <h1>📚 English Practice</h1>
+  <div class="subtitle">英语互动练习 · 6 周入门 · 6 个月强化</div>
+  
+  <div class="cards">
+    <a class="card" href="vocabulary.html">
+      <div class="icon">📖</div>
+      <h2>核心词汇 2000</h2>
+      <p>500 高频 + 10 场景 + 200 短句</p>
+      <div class="badge">输入 · 含会/不会标记</div>
+    </a>
+    
+    <a class="card" href="grammar.html">
+      <div class="icon">⚙️</div>
+      <h2>核心语法 12 点</h2>
+      <p>5 时态 + 情态 + 从句 + 句型</p>
+      <div class="badge">规则</div>
+    </a>
+    
+    <a class="card highlight" href="sentence_practice.html">
+      <div class="icon">✍️</div>
+      <h2>造句练习 60 句</h2>
+      <p>12 语法点 × 5 句型 + 录音 + 自检</p>
+      <div class="badge">🔥 输出（关键）</div>
+    </a>
+
+    <a class="card" href="basic-850.html">
+      <div class="icon">🧭</div>
+      <h2>Basic English 850</h2>
+      <p>Ogden 经典词表 · 基础表达自测</p>
+      <div class="badge">认识 · 能用 · 随机抽测</div>
+    </a>
+  </div>
+  
+  <div class="tips">
+    <strong>🎯 推荐复习顺序（每天 35 分钟）：</strong><br>
+    1️⃣ <strong>早晨 15 分钟</strong>：词汇 HTML → 过滤"❌ 不会" → 听音回忆 → 标记掌握<br>
+    2️⃣ <strong>晚上 20 分钟</strong>：学 1 语法点 → 立刻造 5 句（用造句练习，录音回放）<br><br>
+    
+    <strong>✨ 零外部依赖：</strong>不用 Anki、不用联网、不用登录，全靠浏览器本地存储。<br>
+    
+    <strong>🎤 造句练习核心：</strong>填空模板 + TTS 朗读 + 录音回放 + 自检清单<br>
+    （需要麦克风权限，60 句全过完 = 听说能力显著提升）
+  </div>
+</div>
+</body>
+</html>

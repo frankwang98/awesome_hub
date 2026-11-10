@@ -2,16 +2,16 @@
 
 # Awesome Hub 🌟
 
-> **面向机器人与 AI 工程实践的技术技能知识库** —— 系统沉淀 C++、ROS2、自动驾驶与具身智能知识。
+> **技术工程与通识教育知识库** —— 系统沉淀技术实践、基础知识与理解世界的方法。
 
 ![Awesome](https://cdn.jsdelivr.net/gh/sindresorhus/awesome@main/media/badge.svg)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)
 ![docsify](https://img.shields.io/badge/docsify-4.x-blue.svg)
 
 </div>
 
-欢迎来到 **Awesome Hub**！这里是一个持续维护的**技术技能知识库**：把学习笔记、工程经验、旧 Wiki / CSDN 文章和项目实践，逐步整理成可检索、可验证、可更新的知识体系。
+欢迎来到 **Awesome Hub**！这里是一个持续维护的**技术工程与通识教育知识库**：把学习笔记、工程经验、旧 Wiki / CSDN 文章和项目实践，逐步整理成可检索、可验证、可更新的知识体系。
 
 🔗 [在线阅读 Awesome Hub](https://frankwang98.asia/awesome_hub/)　| 🌐 [我的个人网站](https://frankwang98.asia/)
 
@@ -23,6 +23,8 @@
 
 | 分类 | 说明 |
 | --- | --- |
+| [📚 通识教育](docs/education/README.md) | 语言、数学、科学、人文、经济、法律、艺术与学习方法 |
+| [✍️ 互动练习](docs/education/language/english/practice-lab.md) | 英语词汇、语法与造句；[语文古诗词复习](docs/education/language/chinese/practice-lab.md) |
 | [🚀 C++ 知识库](docs/cpp/README.md) | 基础语法、面向对象、内存、STL、现代 C++、编译工具链、并发、书单资源 |
 | [🤖 ROS / ROS2 知识库](docs/ros2/README.md) | 架构与核心概念、工作空间、话题/服务/动作、TF、URDF、Launch、ROS1 对比、资源 |
 | [🚗 自动驾驶知识库](docs/autonomous-driving/README.md) | 规划控制（搜索/轨迹/控制）、工程实践、感知流程概览、端到端概览 |
@@ -67,4 +69,4 @@
 
 ## 📄 License
 
-[MIT](LICENSE)
+[Apache 2.0](LICENSE)；迁入的通识文档及练习应用保留 [MIT 许可](docs/education/LICENSE)，题库等资源遵循随附的许可声明。

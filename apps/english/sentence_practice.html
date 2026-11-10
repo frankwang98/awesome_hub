@@ -1,0 +1,1622 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>造句练习 · English Practice</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --bg-card: #ffffff;
+    --text: #2a2a2a;
+    --text-muted: #6b6b6b;
+    --accent: #2e7d5b;
+    --accent-light: #e8f5ee;
+    --accent-warm: #d97706;
+    --border: #e5e5e0;
+    --code-bg: #f4f4ee;
+    --shadow: 0 2px 8px rgba(0,0,0,0.05);
+    --danger: #dc2626;
+    --success: #16a34a;
+  }
+  [data-theme="dark"] {
+    --bg: #1a1a1a;
+    --bg-card: #242424;
+    --text: #e8e8e8;
+    --text-muted: #a0a0a0;
+    --accent: #5cb88a;
+    --accent-light: #2a3a30;
+    --border: #383838;
+    --code-bg: #2a2a2a;
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.7;
+    transition: background 0.3s, color 0.3s;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  
+  .sidebar {
+    width: 280px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar h1 {
+    font-size: 18px;
+    color: var(--accent);
+    margin: 0 0 8px 0;
+  }
+  .sidebar .sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .hub-link { color: var(--accent); font-size: 12px; text-decoration: none; display: inline-block; margin: 0 0 10px; }
+  .hub-link:hover { text-decoration: underline; }
+  .toc { list-style: none; padding: 0; margin: 0; }
+  .toc li { margin: 4px 0; }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+  }
+  .toc a:hover { background: var(--accent-light); border-left-color: var(--accent); }
+  
+  .toolbar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+  .toolbar button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+  .toolbar button.active { background: var(--accent); color: white; border-color: var(--accent); }
+  
+  .progress {
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--accent-light);
+    border-radius: 6px;
+  }
+  .progress-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
+  .progress-bar { height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.3s; }
+  .progress-text { font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: bold; }
+  
+  .main {
+    flex: 1;
+    padding: 40px 60px;
+    max-width: 950px;
+  }
+  
+  h1, h2, h3 { color: var(--text); margin-top: 32px; }
+  h1 { font-size: 28px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+  h2 { font-size: 22px; color: var(--accent); }
+  h3 { font-size: 18px; margin-top: 24px; }
+  p { margin: 12px 0; }
+  blockquote {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    margin: 16px 0;
+    color: var(--text);
+    font-size: 14px;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.9em;
+    color: var(--accent);
+  }
+  
+  /* 句型练习卡 */
+  .practice-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+    box-shadow: var(--shadow);
+  }
+  .practice-card .num {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 28px;
+    font-weight: bold;
+    margin-right: 8px;
+  }
+  .practice-card .pattern {
+    background: var(--code-bg);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-family: "SF Mono", Consolas, monospace;
+    margin: 12px 0;
+    border-left: 3px solid var(--accent-warm);
+  }
+  .practice-card .pattern .blank {
+    background: #fef3c7;
+    border: 1px dashed var(--accent-warm);
+    padding: 2px 8px;
+    border-radius: 3px;
+    color: #92400e;
+  }
+  [data-theme="dark"] .practice-card .pattern .blank { background: #44403c; color: #fbbf24; }
+  
+  .practice-card .hint {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin: 8px 0;
+  }
+  
+  .input-row {
+    display: flex;
+    gap: 8px;
+    margin: 12px 0;
+  }
+  .input-row input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    font-family: "SF Mono", Consolas, monospace;
+  }
+  .input-row input:focus { outline: none; border-color: var(--accent); }
+  .input-row input.correct { border-color: var(--success); background: rgba(22, 163, 74, 0.08); }
+  .input-row input.wrong { border-color: var(--danger); background: rgba(220, 38, 38, 0.08); }
+  
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+  .btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn.secondary { background: var(--text-muted); }
+  .btn.warm { background: var(--accent-warm); }
+  .btn.danger { background: var(--danger); }
+  
+  .checklist {
+    background: var(--accent-light);
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-size: 13px;
+  }
+  .checklist label {
+    display: block;
+    margin: 4px 0;
+    cursor: pointer;
+  }
+  .checklist input[type="checkbox"] {
+    margin-right: 6px;
+  }
+  
+  .recording-status {
+    display: none;
+    background: rgba(220, 38, 38, 0.1);
+    border: 1px solid var(--danger);
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--danger);
+    margin: 8px 0;
+    font-size: 13px;
+    align-items: center;
+    gap: 8px;
+  }
+  .recording-status.active { display: flex; }
+  .recording-status .pulse {
+    width: 10px;
+    height: 10px;
+    background: var(--danger);
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  
+  .audio-playback {
+    display: none;
+    margin: 8px 0;
+    padding: 10px;
+    background: var(--code-bg);
+    border-radius: 6px;
+  }
+  .audio-playback.active { display: block; }
+  .audio-playback audio { width: 100%; }
+  
+  .tip-box {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border-left: 4px solid var(--accent-warm);
+    padding: 12px 16px;
+    margin: 16px 0;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  [data-theme="dark"] .tip-box {
+    background: linear-gradient(135deg, #422006 0%, #451a03 100%);
+    color: #fbbf24;
+  }
+  
+  h2.checked { opacity: 0.6; }
+  h2.checked::after { content: ' ✓'; color: var(--accent); }
+  h2 { cursor: pointer; user-select: none; }
+  h2::before {
+    content: '▼';
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-right: 8px;
+    transition: transform 0.2s;
+    display: inline-block;
+  }
+  h2.collapsed::before { transform: rotate(-90deg); }
+  
+  .grammar-ref {
+    background: var(--code-bg);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  .grammar-ref a { color: var(--accent); text-decoration: none; }
+  .grammar-ref a:hover { text-decoration: underline; }
+  
+  @media (max-width: 768px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; }
+    .main { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="hub-link" href="../../#/docs/education/language/english/practice-lab">← Awesome Hub · 通识教育</a>
+    <h1>✍️ 造句练习</h1>
+    <div class="sub">12 语法点 × 5 句型</div>
+    
+    <div class="toolbar">
+      <button id="dark-toggle">🌙 深色</button>
+      <button id="reset-btn">🔄 重置</button>
+    </div>
+    
+    <ul class="toc">
+      <li><a href="#how" data-target="how">📘 使用方法</a></li>
+      <li><a href="#p1" data-target="p1">1. Be 动词</a></li>
+      <li><a href="#p2" data-target="p2">2. 一般现在时</a></li>
+      <li><a href="#p3" data-target="p3">3. 现在进行时</a></li>
+      <li><a href="#p4" data-target="p4">4. 一般过去时</a></li>
+      <li><a href="#p5" data-target="p5">5. 现在完成时</a></li>
+      <li><a href="#p6" data-target="p6">6. 将来时</a></li>
+      <li><a href="#p7" data-target="p7">7. 情态动词</a></li>
+      <li><a href="#p8" data-target="p8">8. 比较级</a></li>
+      <li><a href="#p9" data-target="p9">9. 短语动词</a></li>
+      <li><a href="#p10" data-target="p10">10. 连词从句</a></li>
+      <li><a href="#p11" data-target="p11">11. There be 句型</a></li>
+      <li><a href="#p12" data-target="p12">12. 常用句型</a></li>
+    </ul>
+    
+    <div class="progress">
+      <div class="progress-label">完成度</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text">0 / 60</div>
+    </div>
+  </aside>
+  
+  <main class="main">
+    <h1>✍️ 造句练习</h1>
+    
+    <h2 id="how">📘 使用方法</h2>
+    <div class="tip-box">
+      <strong>每个句型卡 3 步走：</strong><br>
+      1️⃣ 看模板（<span style="background:#fef3c7;padding:1px 4px;border-radius:3px">黄色</span>是填空处），把<strong>你自己的信息</strong>填进去<br>
+      2️⃣ 大声朗读 5 遍（点 🔊 听标准音）<br>
+      3️⃣ 点 🎤 <strong>录音</strong>，录完播放对比，找出差别
+    </div>
+    
+    <h3>为什么"录音"最重要？</h3>
+    <p>听自己的声音会让你立刻发现：</p>
+    <ul>
+      <li>说不顺的地方 = 语法没掌握</li>
+      <li>语调奇怪的地方 = 没模仿过</li>
+      <li>卡顿超过 3 秒 = 这个词不熟</li>
+    </ul>
+    
+    <h3>检查清单怎么用？</h3>
+    <p>每个句型卡有 3-4 个自检项。造完句后逐项打勾——这是从"看着会"到"真的懂"的关键一步。</p>
+    
+    <div class="tip-box">
+      <strong>📌 每日 1 语法点 × 5 句 = 6 周覆盖完 12 语法点</strong><br>
+      每天约 20 分钟。造句 + 录音 + 自检 = 听说全面提升。
+    </div>
+    
+
+    <h2 id="p1">1️⃣ Be 动词（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应语法文件：<a href="grammar.html#1-be">第 1 点：Be 动词</a></div>
+    
+    <div class="practice-card" data-id="p1-1">
+      <span class="num">1</span><strong>自我介绍 - 身份</strong>
+      <div class="pattern">I am <span class="blank">_____</span>.</div>
+      <div class="hint">填入：你的身份（学生 / 工程师 / 设计师…）</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am ____.">
+        <button class="btn tts-btn" data-text="">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音... 点击"停止"结束</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> I 用 am ✓</label>
+        <label><input type="checkbox"> 句末有句号 ✓</label>
+        <label><input type="checkbox"> 大声朗读了 5 遍</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p1-2">
+      <span class="num">2</span><strong>描述他人 - 工作</strong>
+      <div class="pattern">My <span class="blank">关系</span> is a <span class="blank">职业</span>.</div>
+      <div class="hint">填入：家人关系 + 他的职业</div>
+      <div class="input-row">
+        <input type="text" placeholder='造句：My brother is a teacher.'>
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 用了 is（第三人称）✓</label>
+        <label><input type="checkbox"> a + 职业单数</label>
+        <label><input type="checkbox"> 大声朗读了 5 遍</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p1-3">
+      <span class="num">3</span><strong>描述感受 - 现在</strong>
+      <div class="pattern">I am <span class="blank">感受</span> today.</div>
+      <div class="hint">填入：今天的心情（happy / tired / excited…）</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am tired today.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 用了形容词 ✓</label>
+        <label><input type="checkbox"> 录音能听清每个词</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p1-4">
+      <span class="num">4</span><strong>描述物品 - 位置</strong>
+      <div class="pattern">The <span class="blank">物品</span> is on the <span class="blank">地点</span>.</div>
+      <div class="hint">填入：家里某件物品 + 位置</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：The keys are on the table.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 单数用 is，复数用 are</label>
+        <label><input type="checkbox"> 介词 on/in/at 用对</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p1-5">
+      <span class="num">5</span><strong>否定句</strong>
+      <div class="pattern"><span class="blank">主语</span> am/is/are not <span class="blank">表语</span>.</div>
+      <div class="hint">说一个你不擅长/不喜欢的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am not a morning person.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> be 动词 + not ✓</label>
+        <label><input type="checkbox"> 句意通顺</label>
+      </div>
+    </div>
+    
+    <h2 id="p2">2️⃣ 一般现在时（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#2">第 2 点：一般现在时</a></div>
+    
+    <div class="practice-card" data-id="p2-1">
+      <span class="num">1</span><strong>日常习惯</strong>
+      <div class="pattern">I <span class="blank">动词原形</span> <span class="blank">时间</span>.</div>
+      <div class="hint">你每天/每周做的一件事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I drink coffee every morning.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 用了频率副词（every day / usually…）</label>
+        <label><input type="checkbox"> 动词用原形（I/you/we/they）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p2-2">
+      <span class="num">2</span><strong>第三人称 - 家人习惯</strong>
+      <div class="pattern">My <span class="blank">关系</span> <span class="blank">动词+s</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">描述家人常做的事，注意动词加 s</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：My mom cooks dinner every day.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 动词加了 s 或 es ✓</label>
+        <label><input type="checkbox"> s 的发音练了（/s/ /z/ /ɪz/）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p2-3">
+      <span class="num">3</span><strong>一般疑问句</strong>
+      <div class="pattern">Do you <span class="blank">动词原形</span> <span class="blank">宾语</span>?</div>
+      <div class="hint">问你熟悉的人的一个问题</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Do you like spicy food?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 句首 Do ✓</label>
+        <label><input type="checkbox"> 动词用原形（不要加 s）</label>
+        <label><input type="checkbox"> 句末用升调</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p2-4">
+      <span class="num">4</span><strong>否定句</strong>
+      <div class="pattern">I don't <span class="blank">动词原形</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">说你不做的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I don't eat breakfast.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> don't = do not ✓</label>
+        <label><input type="checkbox"> 动词用原形</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p2-5">
+      <span class="num">5</span><strong>客观事实</strong>
+      <div class="pattern">The sun <span class="blank">rise/rises</span> in the east.</div>
+      <div class="hint">说一个客观事实（地球、天文、科学）</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：The earth goes around the sun.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 第三人称单数加 s</label>
+        <label><input type="checkbox"> 事实表述准确</label>
+      </div>
+    </div>
+    
+
+    <h2 id="p3">3️⃣ 现在进行时（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#3">第 3 点：现在进行时</a></div>
+    
+    <div class="practice-card" data-id="p3-1">
+      <span class="num">1</span><strong>此刻正在做的事</strong>
+      <div class="pattern">I am <span class="blank">动词-ing</span> right now.</div>
+      <div class="hint">你此刻正在做的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am reading a book right now.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> am + 动词-ing ✓</label>
+        <label><input type="checkbox"> 加了 right now 或 now</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p3-2">
+      <span class="num">2</span><strong>他人正在做</strong>
+      <div class="pattern"><span class="blank">主语</span> is <span class="blank">动词-ing</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">描述你朋友/家人此刻可能在做什么</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：My friend is studying English.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> is + ing ✓</label>
+        <label><input type="checkbox"> ing 形式正确（make→making, run→running）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p3-3">
+      <span class="num">3</span><strong>多人同时做</strong>
+      <div class="pattern"><span class="blank">人物们</span> are <span class="blank">动词-ing</span> together.</div>
+      <div class="hint">描述一群人正在一起做某事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：We are having dinner together.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 复数用 are ✓</label>
+        <label><input type="checkbox"> 用了 together / at the moment</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p3-4">
+      <span class="num">4</span><strong>否定</strong>
+      <div class="pattern"><span class="blank">主语</span> is/are not <span class="blank">动词-ing</span>.</div>
+      <div class="hint">此刻你不在做的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am not watching TV.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> is/are + not + ing</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p3-5">
+      <span class="num">5</span><strong>疑问句</strong>
+      <div class="pattern">What are you <span class="blank">动词-ing</span>?</div>
+      <div class="hint">询问别人此刻在做什么</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：What are you doing now?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> are 在主语前 ✓</label>
+        <label><input type="checkbox"> 动词要 ing 形式</label>
+        <label><input type="checkbox"> 句末用升调</label>
+      </div>
+    </div>
+    
+    <h2 id="p4">4️⃣ 一般过去时（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#4">第 4 点：一般过去时</a></div>
+    
+    <div class="practice-card" data-id="p4-1">
+      <span class="num">1</span><strong>昨天发生的事</strong>
+      <div class="pattern">Yesterday I <span class="blank">过去式</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">说你昨天做的一件事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Yesterday I watched a movie.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 动词用过去式 ✓</label>
+        <label><input type="checkbox"> 用了时间词（yesterday / last night）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p4-2">
+      <span class="num">2</span><strong>过去的经历</strong>
+      <div class="pattern">I <span class="blank">过去式</span> to <span class="blank">地点</span> last <span class="blank">时间</span>.</div>
+      <div class="hint">你上个月/去年去过的地方</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I went to Japan last year.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 不规则动词过去式正确（go→went）</label>
+        <label><input type="checkbox"> 时间状语搭配</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p4-3">
+      <span class="num">3</span><strong>过去疑问</strong>
+      <div class="pattern">Did you <span class="blank">动词原形</span> <span class="blank">宾语</span> yesterday?</div>
+      <div class="hint">问别人昨天做了什么</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Did you have a good weekend?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Did 在句首 ✓</label>
+        <label><input type="checkbox"> 动词用原形（不要过去式）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p4-4">
+      <span class="num">4</span><strong>过去否定</strong>
+      <div class="pattern">I didn't <span class="blank">动词原形</span> <span class="blank">宾语</span> yesterday.</div>
+      <div class="hint">你昨天没做的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I didn't go to work yesterday.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> didn't + 原形</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p4-5">
+      <span class="num">5</span><strong>过去的状态</strong>
+      <div class="pattern">When I was <span class="blank">年龄</span>, I <span class="blank">过去式</span> in <span class="blank">地点</span>.</div>
+      <div class="hint">回忆童年</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：When I was 10, I lived in Beijing.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> was（I/he/she/it 的过去）✓</label>
+        <label><input type="checkbox"> 时间状语从句</label>
+      </div>
+    </div>
+    
+    <h2 id="p5">5️⃣ 现在完成时（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#5">第 5 点：现在完成时</a></div>
+    
+    <div class="practice-card" data-id="p5-1">
+      <span class="num">1</span><strong>人生经历</strong>
+      <div class="pattern">I have <span class="blank">过去分词</span> to <span class="blank">地点</span> <span class="blank">多少次</span>.</div>
+      <div class="hint">你这辈子去过几次的地方</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I have been to Paris twice.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> have + 过去分词 ✓</label>
+        <label><input type="checkbox"> 不规则分词正确（been, gone, seen）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p5-2">
+      <span class="num">2</span><strong>持续到现在</strong>
+      <div class="pattern">I have <span class="blank">过去分词</span> <span class="blank">名词</span> for <span class="blank">时间</span>.</div>
+      <div class="hint">你坚持了多久的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I have lived here for 5 years.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> for + 时间段 ✓</label>
+        <label><input type="checkbox"> 表达"持续到现在"</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p5-3">
+      <span class="num">3</span><strong>刚完成</strong>
+      <div class="pattern">I have just <span class="blank">过去分词</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">你刚刚做完的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I have just finished my work.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> just 位置在 have 后 ✓</label>
+        <label><input type="checkbox"> 表达"刚刚完成"</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p5-4">
+      <span class="num">4</span><strong>未完成 / 否定</strong>
+      <div class="pattern">I haven't <span class="blank">过去分词</span> <span class="blank">宾语</span> yet.</div>
+      <div class="hint">你还没做的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I haven't seen that movie yet.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> haven't = have not ✓</label>
+        <label><input type="checkbox"> yet 在句末（否定/疑问）</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p5-5">
+      <span class="num">5</span><strong>经历疑问</strong>
+      <div class="pattern">Have you ever <span class="blank">过去分词</span> <span class="blank">宾语</span>?</div>
+      <div class="hint">问别人的人生经历</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Have you ever tried Indian food?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> ever 在 have 后 ✓</label>
+        <label><input type="checkbox"> 问"是否经历过"</label>
+      </div>
+    </div>
+    
+
+    <h2 id="p6">6️⃣ 将来时（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#6">第 6 点：将来时</a></div>
+    
+    <div class="practice-card" data-id="p6-1">
+      <span class="num">1</span><strong>临时决定</strong>
+      <div class="pattern">I will <span class="blank">动词原形</span> <span class="blank">宾语</span> tomorrow.</div>
+      <div class="hint">你明天要做的临时决定</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I will call you tomorrow.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> will + 原形 ✓</label>
+        <label><input type="checkbox"> will 缩写为 'll</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p6-2">
+      <span class="num">2</span><strong>事先计划</strong>
+      <div class="pattern">I am going to <span class="blank">动词原形</span> <span class="blank">时间</span>.</div>
+      <div class="hint">你早就计划好的事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am going to travel next month.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> am going to + 原形 ✓</label>
+        <label><input type="checkbox"> 表达"已计划的未来"</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p6-3">
+      <span class="num">3</span><strong>询问计划</strong>
+      <div class="pattern">What are you going to <span class="blank">动词原形</span> this weekend?</div>
+      <div class="hint">问别人周末计划</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：What are you going to do this weekend?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> are 在主语前 ✓</label>
+        <label><input type="checkbox"> 动词用原形</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p6-4">
+      <span class="num">4</span><strong>预测</strong>
+      <div class="pattern">It will <span class="blank">动词原形</span> tomorrow.</div>
+      <div class="hint">预测天气或事情</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：It will rain tomorrow.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> will 表达预测 ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p6-5">
+      <span class="num">5</span><strong>意愿</strong>
+      <div class="pattern">I will <span class="blank">动词原形</span> to <span class="blank">动词-ing</span>.</div>
+      <div class="hint">表达你愿意/承诺做某事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I will try to learn English.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> try to + 原形 ✓</label>
+        <label><input type="checkbox"> 表达意愿</label>
+      </div>
+    </div>
+    
+    <h2 id="p7">7️⃣ 情态动词（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#7">第 7 点：情态动词</a></div>
+    
+    <div class="practice-card" data-id="p7-1">
+      <span class="num">1</span><strong>能力</strong>
+      <div class="pattern">I can <span class="blank">动词原形</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">你会做的一件事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I can speak English.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> can + 原形 ✓</label>
+        <label><input type="checkbox"> 表达"能力"</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p7-2">
+      <span class="num">2</span><strong>礼貌请求</strong>
+      <div class="pattern">Could you <span class="blank">动词原形</span> <span class="blank">宾语</span>, please?</div>
+      <div class="hint">礼貌地请人帮忙</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Could you help me, please?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Could 比 Can 更礼貌 ✓</label>
+        <label><input type="checkbox"> 用了 please</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p7-3">
+      <span class="num">3</span><strong>邀请</strong>
+      <div class="pattern">Would you like <span class="blank">名词/to do</span>?</div>
+      <div class="hint">邀请别人做某事或给东西</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Would you like some coffee?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Would you like... ✓</label>
+        <label><input type="checkbox"> 比 Do you want... 礼貌</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p7-4">
+      <span class="num">4</span><strong>建议</strong>
+      <div class="pattern">You should <span class="blank">动词原形</span> <span class="blank">宾语</span>.</div>
+      <div class="hint">给别人一个建议</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：You should see a doctor.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> should + 原形 ✓</label>
+        <label><input type="checkbox"> 表达"建议"</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p7-5">
+      <span class="num">5</span><strong>许可</strong>
+      <div class="pattern">May I <span class="blank">动词原形</span> <span class="blank">宾语</span>?</div>
+      <div class="hint">礼貌地请求许可</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：May I use your phone?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> May I 比 Can I 礼貌 ✓</label>
+      </div>
+    </div>
+    
+    <h2 id="p8">8️⃣ 比较级（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#8">第 8 点：比较级</a></div>
+    
+    <div class="practice-card" data-id="p8-1">
+      <span class="num">1</span><strong>两者比较</strong>
+      <div class="pattern"><span class="blank">A</span> is <span class="blank">比较级</span> than <span class="blank">B</span>.</div>
+      <div class="hint">比较两个你熟悉的事物</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Beijing is bigger than Shanghai.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> than 用对 ✓</label>
+        <label><input type="checkbox"> 形容词比较级形式正确</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p8-2">
+      <span class="num">2</span><strong>不规则比较</strong>
+      <div class="pattern"><span class="blank">A</span> is <span class="blank">better/worse/more</span> than <span class="blank">B</span>.</div>
+      <div class="hint">用 good / bad / many 的比较级</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：My new job is better than my old one.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> good→better / bad→worse ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p8-3">
+      <span class="num">3</span><strong>三者的最高级</strong>
+      <div class="pattern"><span class="blank">A</span> is the <span class="blank">最高级</span> <span class="blank">范围</span>.</div>
+      <div class="hint">三者及以上用最高级</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：This is the best restaurant in town.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> the + 最高级 ✓</label>
+        <label><input type="checkbox"> 用了 in + 范围</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p8-4">
+      <span class="num">4</span><strong>长形容词比较</strong>
+      <div class="pattern"><span class="blank">A</span> is more <span class="blank">形容词</span> than <span class="blank">B</span>.</div>
+      <div class="hint">多音节形容词用 more</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：This book is more interesting than that one.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 多音节用 more（不是 -er）✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p8-5">
+      <span class="num">5</span><strong>同等比较</strong>
+      <div class="pattern"><span class="blank">A</span> is as <span class="blank">原级</span> as <span class="blank">B</span>.</div>
+      <div class="hint">表达"一样..."</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：She is as tall as her mother.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> as + 原级 + as ✓</label>
+      </div>
+    </div>
+    
+
+    <h2 id="p9">9️⃣ 短语动词（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#9">第 9 点：介词搭配</a></div>
+    
+    <div class="practice-card" data-id="p9-1">
+      <span class="num">1</span><strong>look forward to</strong>
+      <div class="pattern">I look forward to <span class="blank">动词-ing</span>.</div>
+      <div class="hint">表达期待</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I look forward to seeing you.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> to 是介词 + ing（不是不定式）✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p9-2">
+      <span class="num">2</span><strong>get used to</strong>
+      <div class="pattern">I am getting used to <span class="blank">动词-ing</span>.</div>
+      <div class="hint">表达"正在习惯..."</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I am getting used to waking up early.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> to 是介词 + ing ✓</label>
+        <label><input type="checkbox"> 表达"逐渐习惯"</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p9-3">
+      <span class="num">3</span><strong>turn down / turn up</strong>
+      <div class="pattern">Could you turn <span class="blank">down/up</span> the <span class="blank">名词</span>?</div>
+      <div class="hint">请求调音量</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Could you turn down the music?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> down = 小声 / up = 大声 ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p9-4">
+      <span class="num">4</span><strong>pick up</strong>
+      <div class="pattern">I will pick you up at <span class="blank">时间/地点</span>.</div>
+      <div class="hint">说接人/取东西</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I will pick you up at 6 pm.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> pick up = 接人 ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p9-5">
+      <span class="num">5</span><strong>give up</strong>
+      <div class="pattern">I will never give up <span class="blank">动词-ing</span>.</div>
+      <div class="hint">表达不放弃</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I will never give up learning English.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> give up + ing ✓</label>
+      </div>
+    </div>
+    
+    <h2 id="p10">🔟 连词和从句（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#10">第 10 点：连词从句</a></div>
+    
+    <div class="practice-card" data-id="p10-1">
+      <span class="num">1</span><strong>when 时间状语</strong>
+      <div class="pattern">When I <span class="blank">动词</span>, I usually <span class="blank">动词</span>.</div>
+      <div class="hint">说一个场景和你的反应</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：When I am tired, I usually drink coffee.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> When 从句 + 主句 ✓</label>
+        <label><input type="checkbox"> 时态一致</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p10-2">
+      <span class="num">2</span><strong>because 原因</strong>
+      <div class="pattern">I <span class="blank">动词</span> because I am <span class="blank">形容词</span>.</div>
+      <div class="hint">解释你做某事的原因</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I study English because I want to travel.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> because 表原因 ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p10-3">
+      <span class="num">3</span><strong>although 让步</strong>
+      <div class="pattern">Although I am <span class="blank">形容词</span>, I <span class="blank">动词</span>.</div>
+      <div class="hint">说"虽然...但..."</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Although I am busy, I always make time for my family.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Although = though ✓</label>
+        <label><input type="checkbox"> 后半句常有 but/仍然</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p10-4">
+      <span class="num">4</span><strong>if 条件</strong>
+      <div class="pattern">If I <span class="blank">动词</span> tomorrow, I will <span class="blank">动词</span>.</div>
+      <div class="hint">说一个条件下的计划</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：If it rains tomorrow, I will stay home.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> If 从句用一般现在时 ✓</label>
+        <label><input type="checkbox"> 主句用 will</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p10-5">
+      <span class="num">5</span><strong>宾语从句</strong>
+      <div class="pattern">I think (that) <span class="blank">句子</span>.</div>
+      <div class="hint">表达你的观点</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I think that English is important.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> that 可省略 ✓</label>
+      </div>
+    </div>
+    
+    <h2 id="p11">1️⃣1️⃣ There be 句型（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#11">第 11 点：There be</a></div>
+    
+    <div class="practice-card" data-id="p11-1">
+      <span class="num">1</span><strong>某地有某物</strong>
+      <div class="pattern">There is a <span class="blank">单数名词</span> in/on the <span class="blank">地点</span>.</div>
+      <div class="hint">你家/房间里有什么</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：There is a cat in my room.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 单数用 is ✓</label>
+        <label><input type="checkbox"> 注意名词单复数</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p11-2">
+      <span class="num">2</span><strong>复数</strong>
+      <div class="pattern">There are <span class="blank">数量</span> <span class="blank">复数名词</span> in the <span class="blank">地点</span>.</div>
+      <div class="hint">某个地方有几个东西</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：There are three books on the table.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> 复数用 are ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p11-3">
+      <span class="num">3</span><strong>问路</strong>
+      <div class="pattern">Excuse me, is there a <span class="blank">地点</span> near here?</div>
+      <div class="hint">问附近有什么</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Excuse me, is there a bank near here?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Is there...? ✓</label>
+        <label><input type="checkbox"> Excuse me 礼貌开头</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p11-4">
+      <span class="num">4</span><strong>否定</strong>
+      <div class="pattern">There isn't a <span class="blank">名词</span> in the <span class="blank">地点</span>.</div>
+      <div class="hint">说某地没有某物</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：There isn't a pharmacy in this area.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> isn't = is not ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p11-5">
+      <span class="num">5</span><strong>将来时</strong>
+      <div class="pattern">There will be a <span class="blank">名词</span> <span class="blank">时间</span>.</div>
+      <div class="hint">说将来会有什么事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：There will be a meeting tomorrow.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> There will be ✓</label>
+      </div>
+    </div>
+    
+    <h2 id="p12">1️⃣2️⃣ 常用句型（5 个句型）</h2>
+    <div class="grammar-ref">📖 对应：<a href="grammar.html#12">第 12 点：常用句型</a></div>
+    
+    <div class="practice-card" data-id="p12-1">
+      <span class="num">1</span><strong>提建议</strong>
+      <div class="pattern">Why don't you <span class="blank">动词原形</span>?</div>
+      <div class="hint">给别人提一个建议</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Why don't you take a break?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Why don't you + 原形 ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p12-2">
+      <span class="num">2</span><strong>邀请</strong>
+      <div class="pattern">Would you like to <span class="blank">动词原形</span> with me?</div>
+      <div class="hint">邀请别人一起做某事</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Would you like to have dinner with me?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Would you like to ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p12-3">
+      <span class="num">3</span><strong>表达喜欢</strong>
+      <div class="pattern">I <span class="blank">love/like/enjoy</span> <span class="blank">动词-ing</span>.</div>
+      <div class="hint">说你喜欢做什么</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：I enjoy listening to music.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> enjoy + ing（不是 to do）✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p12-4">
+      <span class="num">4</span><strong>表达意见</strong>
+      <div class="pattern">In my opinion, <span class="blank">句子</span>.</div>
+      <div class="hint">表达你对某事的看法</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：In my opinion, learning English is fun.">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> In my opinion ✓</label>
+      </div>
+    </div>
+    
+    <div class="practice-card" data-id="p12-5">
+      <span class="num">5</span><strong>请求许可</strong>
+      <div class="pattern">Do you mind if I <span class="blank">动词原形</span>?</div>
+      <div class="hint">委婉请求允许</div>
+      <div class="input-row">
+        <input type="text" placeholder="造句：Do you mind if I sit here?">
+        <button class="btn tts-btn">🔊</button>
+        <button class="btn warm rec-btn">🎤 录音</button>
+      </div>
+      <div class="recording-status"><span class="pulse"></span>正在录音...</div>
+      <div class="audio-playback"></div>
+      <div class="checklist">
+        <label><input type="checkbox"> Do you mind if I + 原形 ✓</label>
+        <label><input type="checkbox"> 注意时态用现在</label>
+      </div>
+    </div>
+    
+    <div class="tip-box" style="margin-top: 40px;">
+      <strong>🎉 全部 60 句造完 = 听说突飞猛进</strong><br><br>
+      📌 录音功能使用方法：<br>
+      1. 点 🎤 红色按钮 → 浏览器弹窗"允许麦克风"→ 点头<br>
+      2. 看到"正在录音..."后，大声说出你造的句子<br>
+      3. 再次点按钮（或点"停止"）→ 自动播放你的录音<br>
+      4. 对比 TTS 标准音和自己的差异<br><br>
+      ⚠️ 注意：必须用 <code>file://</code> 协议或 HTTPS 打开页面，录音功能才生效。<br>
+      <code>open /Users/lemon/Documents/english/sentence_practice.html</code>
+    </div>
+    
+  </main>
+</div>
+
+<script>
+// ===== 深色模式 =====
+const darkBtn = document.getElementById('dark-toggle');
+const themeKey = 'education-hub:english:sentence-practice:theme';
+const legacyThemeKey = 'practice-theme';
+const savedTheme = localStorage.getItem(themeKey) || localStorage.getItem(legacyThemeKey);
+if (!localStorage.getItem(themeKey) && savedTheme) localStorage.setItem(themeKey, savedTheme);
+if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+darkBtn.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  localStorage.setItem(themeKey, isDark ? 'light' : 'dark');
+});
+if (savedTheme === 'dark') darkBtn.classList.add('active');
+
+// ===== TTS =====
+function speak(text, btn) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.85;
+  if (btn) btn.classList.add('playing');
+  u.onend = u.onerror = () => { if (btn) btn.classList.remove('playing'); };
+  window.speechSynthesis.speak(u);
+}
+
+// 点击 TTS 按钮：用对应输入框的内容
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('tts-btn')) {
+    const card = e.target.closest('.practice-card');
+    const input = card.querySelector('input');
+    const text = input.value.trim() || input.placeholder.replace('造句：', '').replace('造句:', '').replace(/[？?]/g, '?');
+    if (text) speak(text, e.target);
+  }
+});
+
+// ===== 录音 =====
+let mediaRecorder = null;
+let audioChunks = [];
+let currentCard = null;
+
+document.addEventListener('click', async e => {
+  if (e.target.classList.contains('rec-btn')) {
+    const card = e.target.closest('.practice-card');
+    const status = card.querySelector('.recording-status');
+    const playback = card.querySelector('.audio-playback');
+    
+    if (mediaRecorder && mediaRecorder.state === 'recording') {
+      // 停止录音
+      mediaRecorder.stop();
+      e.target.textContent = '🎤 录音';
+      e.target.classList.remove('danger');
+      e.target.classList.add('warm');
+      status.classList.remove('active');
+      return;
+    }
+    
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      mediaRecorder = new MediaRecorder(stream);
+      audioChunks = [];
+      currentCard = card;
+      
+      mediaRecorder.ondataavailable = e => {
+        if (e.data.size > 0) audioChunks.push(e.data);
+      };
+      
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(audioChunks, { type: 'audio/webm' });
+        const url = URL.createObjectURL(blob);
+        const input = card.querySelector('input');
+        const text = input.value.trim() || input.placeholder;
+        playback.innerHTML = `
+          <div style="font-size:12px;color:var(--text-muted);margin-bottom:6px">📝 ${text}</div>
+          <audio controls src="${url}"></audio>
+        `;
+        playback.classList.add('active');
+        stream.getTracks().forEach(t => t.stop());
+      };
+      
+      mediaRecorder.start();
+      e.target.textContent = '⏹️ 停止';
+      e.target.classList.remove('warm');
+      e.target.classList.add('danger');
+      status.classList.add('active');
+    } catch (err) {
+      alert('无法访问麦克风：' + err.message + '\n\n请确保：\n1. 浏览器有麦克风权限\n2. 用 file:// 或 HTTPS 打开页面\n3. 不是 localhost 的话需要 HTTPS');
+    }
+  }
+});
+
+// ===== 自检打勾 =====
+document.addEventListener('change', e => {
+  if (e.target.matches('.checklist input[type="checkbox"]')) {
+    const card = e.target.closest('.practice-card');
+    updateProgress();
+  }
+});
+
+// ===== 输入提示 =====
+document.addEventListener('input', e => {
+  if (e.target.matches('.input-row input')) {
+    // 简单语法检查
+    const text = e.target.value.trim();
+    e.target.classList.remove('correct', 'wrong');
+    if (!text) return;
+    
+    // 基本正确性：首字母大写、句末标点
+    if (text.length > 3) {
+      const firstChar = text[0];
+      const lastChar = text[text.length - 1];
+      if (firstChar === firstChar.toUpperCase() && /[.?!]$/.test(text)) {
+        e.target.classList.add('correct');
+      }
+    }
+  }
+});
+
+// ===== 章节折叠 =====
+document.querySelectorAll('main h2').forEach(h => {
+  if (h.id === 'how') return; // 使用方法不折叠
+  h.addEventListener('click', e => {
+    let next = h.nextElementSibling;
+    h.classList.toggle('collapsed');
+    const collapsed = h.classList.contains('collapsed');
+    while (next && next.tagName !== 'H2') {
+      next.style.display = collapsed ? 'none' : '';
+      next = next.nextElementSibling;
+    }
+  });
+});
+
+// ===== 进度 =====
+function updateProgress() {
+  const total = document.querySelectorAll('.practice-card').length;
+  let done = 0;
+  document.querySelectorAll('.practice-card').forEach(card => {
+    const checks = card.querySelectorAll('.checklist input[type="checkbox"]');
+    const allChecked = Array.from(checks).every(c => c.checked);
+    const hasInput = card.querySelector('input').value.trim().length > 0;
+    if (allChecked && hasInput) done++;
+  });
+  document.getElementById('progress-fill').style.width = (done/total*100) + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + total;
+  localStorage.setItem(progressKey, JSON.stringify({date: Date.now(), done, total}));
+}
+
+// 加载进度
+const progressKey = 'education-hub:english:sentence-practice:progress';
+const legacyProgressKey = 'practice-progress';
+const savedProgressValue = localStorage.getItem(progressKey) || localStorage.getItem(legacyProgressKey) || 'null';
+if (!localStorage.getItem(progressKey) && savedProgressValue !== 'null') localStorage.setItem(progressKey, savedProgressValue);
+const savedProgress = JSON.parse(savedProgressValue);
+if (savedProgress) {
+  console.log('上次进度：' + savedProgress.done + ' / ' + savedProgress.total);
+}
+
+document.querySelectorAll('.checklist input[type="checkbox"]').forEach(c => {
+  c.addEventListener('change', updateProgress);
+});
+
+// ===== 重置 =====
+document.getElementById('reset-btn').addEventListener('click', () => {
+  if (confirm('确定要清空所有输入和勾选吗？')) {
+    document.querySelectorAll('.input-row input').forEach(i => i.value = '');
+    document.querySelectorAll('.checklist input[type="checkbox"]').forEach(c => c.checked = false);
+    document.querySelectorAll('.audio-playback').forEach(p => p.classList.remove('active'));
+    updateProgress();
+  }
+});
+
+// ===== 目录点击 =====
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById(a.dataset.target);
+    if (target) {
+      target.classList.remove('collapsed');
+      let next = target.nextElementSibling;
+      while (next && next.tagName !== 'H2') {
+        next.style.display = '';
+        next = next.nextElementSibling;
+      }
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  });
+});
+
+// ===== 快捷键 =====
+document.addEventListener('keydown', e => {
+  if (e.key === 'd' && !e.target.matches('input,textarea')) darkBtn.click();
+});
+</script>
+</body>
+</html>

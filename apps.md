@@ -46,3 +46,8 @@
 | [crontab.guru](https://crontab.guru/) | Cron 表达式可视化编辑与解释 |
 | [Asciinema](https://asciinema.org/) | 终端录屏分享，可嵌入网页 |
 | [OverAPI](https://overapi.com/) | 常用编程语言的 API 速查索引 |
+
+## 互动学习
+
+- [英语词汇、语法与造句练习](docs/education/language/english/practice-lab.md)
+- [古诗词复习与默写](docs/education/language/chinese/practice-lab.md)

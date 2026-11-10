@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ogden Basic English 850 · English Practice</title>
+  <style>
+    :root { --ink:#213547; --muted:#607080; --paper:#fff; --canvas:#f3f7f4; --line:#dbe6df; --accent:#24734e; --accent-soft:#e5f4eb; --use:#1d7049; --know:#aa6b15; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--canvas); color:var(--ink); font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC",sans-serif; }
+    .wrap { width:min(1120px,calc(100% - 32px)); margin:auto; padding:28px 0 56px; }
+    a { color:var(--accent); } .back { font-size:14px; text-decoration:none; } .back:hover { text-decoration:underline; }
+    header { margin:30px 0 20px; } .eyebrow { color:var(--accent); font-size:12px; font-weight:800; letter-spacing:.13em; }
+    h1 { line-height:1.2; margin:8px 0; font-size:clamp(30px,5vw,43px); } .lead { margin:0; color:var(--muted); max-width:760px; }
+    .notice { background:#fff8e8; border:1px solid #ead7a8; padding:14px 16px; border-radius:12px; font-size:14px; margin:22px 0; }
+    .stats, .controls { background:var(--paper); border:1px solid var(--line); border-radius:14px; padding:16px; }
+    .stats { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:20px 0; } .stat strong { display:block; font-size:25px; color:var(--accent); } .stat span { font-size:13px; color:var(--muted); }
+    .controls { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:16px; }
+    input { min-width:180px; flex:1; padding:9px 11px; border:1px solid var(--line); border-radius:8px; font:inherit; }
+    button { appearance:none; cursor:pointer; font:inherit; font-size:14px; padding:8px 11px; border-radius:8px; border:1px solid var(--line); background:#fff; color:var(--ink); }
+    button:hover, button.active { color:var(--accent); border-color:var(--accent); background:var(--accent-soft); } .danger:hover { color:#a63e2d; border-color:#d4958c; background:#fff0ed; }
+    .groups { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 16px; }
+    .quiz { display:none; padding:16px; border:1px solid #b7daca; border-radius:14px; background:#f5fcf7; margin-bottom:16px; } .quiz.show { display:block; }
+    .quiz-word { font-size:28px; font-weight:700; margin:8px 0; } .quiz-actions { display:flex; flex-wrap:wrap; gap:8px; }
+    .feedback { min-height:24px; margin:10px 0 0; font-size:14px; } .feedback.good { color:var(--use); } .feedback.bad { color:#b42318; }
+    .word-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(132px,1fr)); gap:9px; }
+    .word { min-height:42px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; text-align:left; position:relative; } .word::after { content:""; position:absolute; right:8px; top:50%; width:8px; height:8px; border-radius:50%; transform:translateY(-50%); background:#cbd5d0; }
+    .word.recognize { border-color:#e2bf78; background:#fff9eb; } .word.recognize::after { background:var(--know); } .word.use { border-color:#96d1af; background:var(--accent-soft); } .word.use::after { background:var(--use); }
+    .legend, footer { color:var(--muted); font-size:13px; margin:18px 0; } .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin:0 4px 0 12px; } .dot:first-child{margin-left:0}.unseen{background:#cbd5d0}.recognize-dot{background:var(--know)}.use-dot{background:var(--use)}
+    @media (max-width:600px) { .wrap { width:min(100% - 24px,1120px); } .stats { grid-template-columns:1fr; } .word-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="back" href="../../#/docs/education/language/english/basic-english-850">← 返回 Awesome Hub · 通识教育 · 英语学习</a>
+    <header>
+      <div class="eyebrow">OGDEN · BASIC ENGLISH · 1930</div>
+      <h1>Basic English 850 自测</h1>
+      <p class="lead">一份有纪念意义的英语最小表达骨架。它不是现代高频词排行榜，而是 C. K. Ogden 为基础交流设计的受控词表；用它检查“我认识什么”和“我能拿来表达什么”。</p>
+    </header>
+
+    <div class="notice"><strong>使用方式：</strong>随机抽测会在“英文选释义”和“中文拼写英文”之间切换。只有答对才计入进度；词卡颜色表示答对记录，而不是自我声明。</div>
+    <section class="stats"><div class="stat"><strong id="total">0 / 850</strong><span>至少答对一次</span></div><div class="stat"><strong id="recognize">0%</strong><span>总正确率</span></div><div class="stat"><strong id="use">0</strong><span>累计答对</span></div></section>
+    <section class="controls"><input id="search" type="search" placeholder="搜索词语，例如: water"><button id="random" type="button">随机抽测</button><button id="clear" class="danger" type="button">清空进度</button></section>
+    <div id="groups" class="groups" aria-label="原始分类"></div>
+    <section id="quiz" class="quiz" aria-live="polite"><div id="quiz-prompt"></div><div id="quiz-word" class="quiz-word"></div><div id="quiz-actions" class="quiz-actions"></div><div id="quiz-feedback" class="feedback"></div></section>
+    <div class="legend"><span class="dot unseen"></span>未答对 <span class="dot use-dot"></span>至少答对一次。词表保留 Ogden 的五类原始分组和替代拼写。</div>
+    <section id="words" class="word-grid" aria-label="Basic English 850 words"></section>
+    <footer>词表来源：<a id="source" target="_blank" rel="noopener">Ogden’s Basic English Word List</a>（1930；本地数据最后核对：2026-09-27）。学习状态仅保存在当前浏览器。</footer>
+  </main>
+  <script type="module">
+    const data = await fetch('./data/basic-850-reviewed.json').then(response => { if (!response.ok) throw new Error('无法加载 Basic 850 题库'); return response.json(); });
+    const labels = {operations:'操作词', general_things:'一般事物', picturable_things:'可指认事物', qualities_general:'一般性质', qualities_opposites:'反义性质'};
+    const categories = [...new Set(data.words.map(word => word.category))];
+    const allWords = data.words;
+    const key = 'education-hub:english:basic-850:results';
+    const stored = JSON.parse(localStorage.getItem(key) || '{}');
+    const saved = stored.words ? stored : {attempts:0, correct:0, words:{}};
+    let activeGroup = -1; let activeQuiz = null;
+    const groups = document.getElementById('groups'); const words = document.getElementById('words'); const search = document.getElementById('search');
+    document.getElementById('source').href = data.source.url;
+    const save = () => localStorage.setItem(key, JSON.stringify(saved));
+    const statusFor = word => saved.words[word.headword]?.correct || 0;
+    function renderStats() { const solved=Object.values(saved.words).filter(result=>result.correct).length; document.getElementById('total').textContent=`${solved} / ${allWords.length}`; document.getElementById('recognize').textContent=saved.attempts ? `${Math.round(saved.correct / saved.attempts * 100)}%` : '0%'; document.getElementById('use').textContent=saved.correct; }
+    function renderGroups() { groups.innerHTML=''; const all=document.createElement('button'); all.textContent='全部 850'; all.className=activeGroup===-1?'active':''; all.onclick=()=>{activeGroup=-1;render();}; groups.append(all); categories.forEach((category,index)=>{const button=document.createElement('button'); const count=allWords.filter(word=>word.category===category).length; button.textContent=`${labels[category]} · ${count}`; button.className=activeGroup===index?'active':''; button.onclick=()=>{activeGroup=index;render();}; groups.append(button);}); }
+    function renderWords() { const query=search.value.trim().toLowerCase(); words.innerHTML=''; allWords.filter(item => (activeGroup===-1 || item.category===categories[activeGroup]) && item.headword.toLowerCase().includes(query)).forEach(item => { const button=document.createElement('button'); button.textContent=item.headword; button.title='点击以此词开始测验'; button.className=`word ${statusFor(item)?'use':''}`; button.onclick=()=>startQuiz(item); words.append(button); }); }
+    function record(word, correct) { saved.attempts++; if (correct) saved.correct++; saved.words[word.headword]={correct:(saved.words[word.headword]?.correct||0)+(correct?1:0)}; save(); renderStats(); renderWords(); }
+    const choose = list => list[Math.floor(Math.random()*list.length)];
+    function startQuiz(word) { activeQuiz=word; const quiz=document.getElementById('quiz'); const prompt=document.getElementById('quiz-prompt'); const target=document.getElementById('quiz-word'); const actions=document.getElementById('quiz-actions'); const feedback=document.getElementById('quiz-feedback'); quiz.classList.add('show'); actions.innerHTML=''; feedback.textContent=''; const spelling=Math.random()<.5; if(spelling){prompt.textContent='根据中文释义，拼写对应的英文词：'; target.textContent=word.gloss_zh_tw; const input=document.createElement('input'); input.placeholder='输入英文单词'; const button=document.createElement('button'); button.textContent='检查拼写'; button.className='check'; button.onclick=()=>{const ok=input.value.trim().toLowerCase()===word.headword.toLowerCase(); record(word,ok); feedback.textContent=ok?'正确。':'答案：'+word.headword; feedback.className=`feedback ${ok?'good':'bad'}`;}; actions.append(input,button);}else{prompt.textContent='选择该英文词的正确中文释义：'; target.textContent=word.headword; const options=[word,...allWords.filter(item=>item.headword!==word.headword).sort(()=>Math.random()-.5).slice(0,3)].sort(()=>Math.random()-.5); options.forEach(option=>{const button=document.createElement('button'); button.textContent=option.gloss_zh_tw; button.onclick=()=>{const ok=option.headword===word.headword; record(word,ok); feedback.textContent=ok?'正确。 '+word.example_en:'正确答案：'+word.gloss_zh_tw; feedback.className=`feedback ${ok?'good':'bad'}`; [...actions.children].forEach(item=>item.disabled=true);}; actions.append(button);});} }
+    function render() { renderStats(); renderGroups(); renderWords(); }
+    search.addEventListener('input',renderWords);
+    document.getElementById('random').onclick=()=>{const pool=allWords.filter(item=>activeGroup===-1 || item.category===categories[activeGroup]); startQuiz(choose(pool));};
+    document.getElementById('clear').onclick=()=>{if(confirm('确定清空 Basic 850 的全部测验记录吗？')){localStorage.removeItem(key); saved.attempts=0;saved.correct=0;saved.words={};render();}};
+    render();
+  </script>
+</body>
+</html>

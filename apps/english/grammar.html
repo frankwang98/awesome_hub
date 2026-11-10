@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>英语语法 12 核心</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --bg-card: #ffffff;
+    --text: #2a2a2a;
+    --text-muted: #6b6b6b;
+    --accent: #2e7d5b;
+    --accent-light: #e8f5ee;
+    --border: #e5e5e0;
+    --code-bg: #f4f4ee;
+    --shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  [data-theme="dark"] {
+    --bg: #1a1a1a;
+    --bg-card: #242424;
+    --text: #e8e8e8;
+    --text-muted: #a0a0a0;
+    --accent: #5cb88a;
+    --accent-light: #2a3a30;
+    --border: #383838;
+    --code-bg: #2a2a2a;
+    --shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    margin: 0;
+    line-height: 1.7;
+    transition: background 0.3s, color 0.3s;
+  }
+  .layout { display: flex; min-height: 100vh; }
+  
+  /* 侧边栏 */
+  .sidebar {
+    width: 280px;
+    background: var(--bg-card);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+  .sidebar h1 {
+    font-size: 18px;
+    color: var(--accent);
+    margin: 0 0 8px 0;
+  }
+  .sidebar .sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+  .hub-link { color: var(--accent); font-size: 12px; text-decoration: none; display: inline-block; margin: 0 0 10px; }
+  .hub-link:hover { text-decoration: underline; }
+  .toc {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .toc li { margin: 4px 0; }
+  .toc a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    display: block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border-left: 3px solid transparent;
+  }
+  .toc a:hover {
+    background: var(--accent-light);
+    border-left-color: var(--accent);
+  }
+  .toc .h3 { padding-left: 20px; font-size: 13px; color: var(--text-muted); }
+  .toc .h4 { padding-left: 32px; font-size: 12px; color: var(--text-muted); }
+  
+  /* 工具栏 */
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .toolbar button {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  .toolbar button:hover { background: var(--accent-light); border-color: var(--accent); }
+  .toolbar button.active { background: var(--accent); color: white; border-color: var(--accent); }
+  
+  /* 进度 */
+  .progress {
+    margin-top: 20px;
+    padding: 12px;
+    background: var(--accent-light);
+    border-radius: 6px;
+  }
+  .progress-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 6px;
+    background: var(--border);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.3s;
+  }
+  .progress-text {
+    font-size: 12px;
+    color: var(--accent);
+    margin-top: 4px;
+    font-weight: bold;
+  }
+  
+  /* 主内容 */
+  .main {
+    flex: 1;
+    padding: 40px 60px;
+    max-width: 900px;
+  }
+  h1, h2, h3, h4 {
+    color: var(--text);
+    margin-top: 32px;
+    margin-bottom: 12px;
+  }
+  h1 { font-size: 28px; border-bottom: 2px solid var(--accent); padding-bottom: 8px; }
+  h2 { font-size: 22px; color: var(--accent); margin-top: 40px; }
+  h3 { font-size: 18px; }
+  h4 { font-size: 16px; color: var(--text-muted); }
+  p { margin: 12px 0; }
+  blockquote {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 10px 16px;
+    margin: 16px 0;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 0.9em;
+  }
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+  
+  /* 词汇块 */
+  .vocab-block {
+    background: var(--code-bg);
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 12px 0;
+    font-family: "SF Mono", Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.9;
+  }
+  .vocab-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 2px 0;
+  }
+  .vocab-line .en { flex: 1; }
+  .vocab-line.review-mode .en { 
+    filter: blur(5px);
+    transition: filter 0.3s;
+  }
+  .vocab-line.review-mode:hover .en { filter: none; }
+  
+  /* 列表项 */
+  .list-item, .sub-item {
+    padding: 4px 0;
+    margin: 2px 0;
+  }
+  .sub-item {
+    padding-left: 20px;
+    color: var(--text-muted);
+    font-size: 14px;
+  }
+  
+  /* 例句 */
+  .example-line {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dashed var(--border);
+  }
+  .example-line .en-text {
+    flex: 1;
+    color: var(--text);
+  }
+  .example-line .cn-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+    opacity: 0.5;
+  }
+  .example-line.review-mode .en-text {
+    filter: blur(5px);
+    transition: filter 0.3s;
+  }
+  .example-line.review-mode:hover .en-text { filter: none; }
+  
+  /* 朗读按钮 */
+  .tts-btn {
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 14px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .tts-btn:hover { transform: scale(1.1); }
+  .tts-btn.playing { background: #d97706; }
+  
+  /* 章节标记 */
+  h2, h3 {
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+  }
+  h2::before, h3::before {
+    content: '▼';
+    position: absolute;
+    left: -20px;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: transform 0.2s;
+  }
+  h2.collapsed::before, h3.collapsed::before {
+    transform: rotate(-90deg);
+  }
+  
+  /* 复习模式 */
+  body.review-mode .vocab-line .en,
+  body.review-mode .example-line .en-text {
+    filter: blur(5px);
+    transition: filter 0.3s;
+  }
+  body.review-mode .vocab-line:hover .en,
+  body.review-mode .example-line:hover .en-text {
+    filter: none;
+  }
+  
+  /* 已学标记 */
+  h2.checked {
+    opacity: 0.6;
+  }
+  h2.checked::after {
+    content: ' ✓';
+    color: var(--accent);
+  }
+  
+  /* 移动端 */
+  @media (max-width: 768px) {
+    .layout { flex-direction: column; }
+    .sidebar { width: 100%; height: auto; position: relative; }
+    .main { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside class="sidebar">
+    <a class="hub-link" href="../../#/docs/education/language/english/practice-lab">← Awesome Hub · 通识教育</a>
+    <h1>📚 英语语法 12 核心</h1>
+    <div class="sub">English Practice · Awesome Hub · 通识教育</div>
+    
+    <div class="toolbar">
+      <button id="review-toggle" title="遮住英文，看中文回忆">👁️ 复习模式</button>
+      <button id="dark-toggle">🌙 深色</button>
+      <button id="tts-all">▶️ 朗读本页</button>
+    </div>
+    
+    <ul class="toc">
+      <li><a href="#1-be" data-target="1-be">第 1 点：Be 动词（最最基础）</a></li>
+<li><a href="#2" data-target="2">第 2 点：一般现在时（日常状态和习惯）</a></li>
+<li><a href="#3" data-target="3">第 3 点：现在进行时（正在发生的事）</a></li>
+<li><a href="#4" data-target="4">第 4 点：一般过去时（过去发生的事）</a></li>
+<li><a href="#5" data-target="5">第 5 点：现在完成时（过去发生并影响现在）</a></li>
+<li><a href="#6" data-target="6">第 6 点：将来时（将来发生的事）</a></li>
+<li><a href="#1-will" data-target="1-will">方式 1：will + 动词原形（最常用）</a></li>
+<li><a href="#2-be-going-to" data-target="2-be-going-to">方式 2：be going to + 动词原形（计划、打算）</a></li>
+<li><a href="#7" data-target="7">第 7 点：情态动词（表达能力和意愿）</a></li>
+<li><a href="#can-could" data-target="can-could">can / could：能力、请求、可能</a></li>
+<li><a href="#will-would" data-target="will-would">will / would：意愿、请求</a></li>
+<li><a href="#should-must" data-target="should-must">should / must：建议、必须</a></li>
+<li><a href="#may-might" data-target="may-might">may / might：可能、许可</a></li>
+<li><a href="#8" data-target="8">第 8 点：比较级和最高级</a></li>
+<li><a href="#9" data-target="9">第 9 点：介词搭配（高频短语动词）</a></li>
+<li><a href="#" data-target="">常用短语动词</a></li>
+<li><a href="#10" data-target="10">第 10 点：连词和从句</a></li>
+<li><a href="#" data-target="">时间连词</a></li>
+<li><a href="#" data-target="">原因连词</a></li>
+<li><a href="#" data-target="">让步连词</a></li>
+<li><a href="#" data-target="">条件连词</a></li>
+<li><a href="#" data-target="">宾语从句</a></li>
+<li><a href="#11-there-be" data-target="11-there-be">第 11 点：there be 句型</a></li>
+<li><a href="#12" data-target="12">第 12 点：常用句型（口语必背）</a></li>
+<li><a href="#" data-target="">提建议 / 邀请</a></li>
+<li><a href="#" data-target="">表达意见</a></li>
+<li><a href="#" data-target="">请求许可</a></li>
+<li><a href="#" data-target="">表示喜欢 / 不喜欢</a></li>
+<li><a href="#" data-target="">描述经历</a></li>
+<li><a href="#" data-target="">表达频率</a></li>
+<li><a href="#" data-target="">学习顺序与时间分配</a></li>
+<li><a href="#" data-target="">核心学习方法</a></li>
+<li><a href="#1" data-target="1">1. 学语法不要"看书"——要"造句"</a></li>
+<li><a href="#2" data-target="2">2. 配听说训练</a></li>
+<li><a href="#3" data-target="3">3. 错也要说</a></li>
+<li><a href="#4" data-target="4">4. 跟读训练</a></li>
+<li><a href="#5" data-target="5">5. 推荐教材（任选一本）</a></li>
+<li><a href="#6" data-target="6">6. 检验标准</a></li>
+    </ul>
+    
+    <div class="progress">
+      <div class="progress-label">学习进度</div>
+      <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+      <div class="progress-text" id="progress-text">0 / 0</div>
+    </div>
+  </aside>
+  
+  <main class="main">
+    <h1 id="12" class="h1">实用英语核心语法 (12 个关键点)</h1>
+<blockquote>目标：掌握这 12 个语法点，能听懂、能说出 80% 日常交流内容。</blockquote>
+<blockquote>学法：**学一个点，立刻造 5 个自己的句子说出来**，不刷题不背书。</blockquote>
+<hr>
+<h2 id="1-be" class="h2">第 1 点：Be 动词（最最基础）</h2>
+<p><strong>三种形式：</strong> am / is / are</p>
+<p><strong>公式：</strong> 主语 + be + 表语</p>
+<p>| 主语 | be 动词 | 例句 | |------|--------|------| | I | am | I am happy. | | He / She / It | is | She is a teacher. | | You / We / They | are | They are friends. |</p>
+<p><strong>否定：</strong> 主语 + be + not</p>
+<div class="example-line"><span class="en-text">I am not tired.</span><button class="tts-btn" data-text="I am not tired.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">He is not here.</span><button class="tts-btn" data-text="He is not here.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>疑问：</strong> Be + 主语 + 表语？</p>
+<div class="example-line"><span class="en-text">Are you ready? → Yes, I am. / No, I'm not.</span><button class="tts-btn" data-text="Are you ready? → Yes, I am. / No, I&#x27;m not.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Is she a student? → Yes, she is. / No, she isn't.</span><button class="tts-btn" data-text="Is she a student? → Yes, she is. / No, she isn&#x27;t.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>缩写（口语必备）：</strong></p>
+<div class="list-item">• I am → I'm</div>
+<div class="list-item">• He is → He's</div>
+<div class="list-item">• You are → You're</div>
+<div class="list-item">• They are → They're</div>
+<div class="list-item">• is not → isn't</div>
+<div class="list-item">• are not → aren't</div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">听："How are you?" → 答："I'm fine, thanks."</span><button class="tts-btn" data-text="听：&quot;How are you?&quot; → 答：&quot;I&#x27;m fine, thanks.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听："Where are you from?" → 答："I'm from China."</span><button class="tts-btn" data-text="听：&quot;Where are you from?&quot; → 答：&quot;I&#x27;m from China.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听："What time is it?" → 答："It's 3 o'clock."</span><button class="tts-btn" data-text="听：&quot;What time is it?&quot; → 答：&quot;It&#x27;s 3 o&#x27;clock.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="2" class="h2">第 2 点：一般现在时（日常状态和习惯）</h2>
+<p><strong>用法：</strong> 描述经常做的事、事实、状态</p>
+<p><strong>公式：</strong> 主语 + 动词原形（第三人称单数加 s/es）</p>
+<p>| 主语 | 动词形式 | 例句 | |------|---------|------| | I / You / We / They | 原形 | I work in a company. | | He / She / It | 原形 + s/es | She works in a company. |</p>
+<p><strong>第三人称单数变化规则：</strong></p>
+<div class="list-item">• 一般加 s：work → works</div>
+<div class="list-item">• 以 s / x / ch / sh 结尾加 es：watch → watches</div>
+<div class="list-item">• 辅音 + y 变 ies：study → studies</div>
+<div class="list-item">• have 变 has</div>
+<p><strong>否定：</strong> 主语 + don't / doesn't + 动词原形</p>
+<div class="example-line"><span class="en-text">I don't like coffee.</span><button class="tts-btn" data-text="I don&#x27;t like coffee.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">He doesn't like coffee.</span><button class="tts-btn" data-text="He doesn&#x27;t like coffee.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>疑问：</strong> Do / Does + 主语 + 动词原形？</p>
+<div class="example-line"><span class="en-text">Do you speak English? → Yes, I do. / No, I don't.</span><button class="tts-btn" data-text="Do you speak English? → Yes, I do. / No, I don&#x27;t.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Does she like music? → Yes, she does. / No, she doesn't.</span><button class="tts-btn" data-text="Does she like music? → Yes, she does. / No, she doesn&#x27;t.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"What do you do for a living?" → "I work as a designer."</span><button class="tts-btn" data-text="&quot;What do you do for a living?&quot; → &quot;I work as a designer.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Do you like pizza?" → "Yes, I do."</span><button class="tts-btn" data-text="&quot;Do you like pizza?&quot; → &quot;Yes, I do.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"She always drinks coffee in the morning."（听写理解）</span><button class="tts-btn" data-text="&quot;She always drinks coffee in the morning.&quot;（听写理解）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="3" class="h2">第 3 点：现在进行时（正在发生的事）</h2>
+<p><strong>用法：</strong> 描述<strong>此刻</strong>正在做的事</p>
+<p><strong>公式：</strong> 主语 + be + 动词-ing</p>
+<div class="example-line"><span class="en-text">I am working right now.</span><button class="tts-btn" data-text="I am working right now.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">She is reading a book.</span><button class="tts-btn" data-text="She is reading a book.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">They are playing football.</span><button class="tts-btn" data-text="They are playing football.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>ing 形式规则：</strong></p>
+<div class="list-item">• 一般加 ing：work → working</div>
+<div class="list-item">• 去 e 加 ing：make → making</div>
+<div class="list-item">• 重读闭音节双写最后字母加 ing：run → running</div>
+<p><strong>否定：</strong> 主语 + be + not + 动词-ing</p>
+<div class="example-line"><span class="en-text">I am not watching TV.</span><button class="tts-btn" data-text="I am not watching TV.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>疑问：</strong> Be + 主语 + 动词-ing？</p>
+<div class="example-line"><span class="en-text">Are you listening to me?</span><button class="tts-btn" data-text="Are you listening to me?">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">What are you doing?</span><button class="tts-btn" data-text="What are you doing?">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"What are you doing right now?" → "I'm studying English."</span><button class="tts-btn" data-text="&quot;What are you doing right now?&quot; → &quot;I&#x27;m studying English.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Where is she going?" → "She's going to the store."</span><button class="tts-btn" data-text="&quot;Where is she going?&quot; → &quot;She&#x27;s going to the store.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "I'm having lunch with my family" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;I&#x27;m having lunch with my family&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="4" class="h2">第 4 点：一般过去时（过去发生的事）</h2>
+<p><strong>用法：</strong> 描述<strong>过去</strong>做过的事</p>
+<p><strong>公式：</strong> 主语 + 动词过去式</p>
+<p><strong>规则变化：</strong></p>
+<div class="list-item">• 一般加 ed：work → worked</div>
+<div class="list-item">• 以 e 结尾加 d：like → liked</div>
+<div class="list-item">• 辅音 + y 变 ied：study → studied</div>
+<div class="list-item">• 重读闭音节双写最后字母加 ed：stop → stopped</div>
+<p><strong>不规则变化（必背 30 个）：</strong></p>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="go → went | come → came | see → saw | take → took | give → gave">🔊</button><span class="en">go → went | come → came | see → saw | take → took | give → gave</span></div><div class="vocab-line"><button class="tts-btn" data-text="get → got | make → made | do → did | have → had | say → said">🔊</button><span class="en">get → got | make → made | do → did | have → had | say → said</span></div><div class="vocab-line"><button class="tts-btn" data-text="tell → told | think → thought | know → knew | feel → felt | find → found">🔊</button><span class="en">tell → told | think → thought | know → knew | feel → felt | find → found</span></div><div class="vocab-line"><button class="tts-btn" data-text="leave → left | bring → brought | buy → bought | meet → met | eat → ate">🔊</button><span class="en">leave → left | bring → brought | buy → bought | meet → met | eat → ate</span></div><div class="vocab-line"><button class="tts-btn" data-text="drink → drank | read → read（发音不同）| write → wrote | speak → spoke">🔊</button><span class="en">drink → drank | read → read（发音不同）| write → wrote | speak → spoke</span></div><div class="vocab-line"><button class="tts-btn" data-text="run → ran | sit → sat | stand → stood | win → won | lose → lost">🔊</button><span class="en">run → ran | sit → sat | stand → stood | win → won | lose → lost</span></div></div>
+<p><strong>否定：</strong> 主语 + didn't + 动词原形</p>
+<div class="example-line"><span class="en-text">I didn't go to school yesterday.</span><button class="tts-btn" data-text="I didn&#x27;t go to school yesterday.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>疑问：</strong> Did + 主语 + 动词原形？</p>
+<div class="example-line"><span class="en-text">Did you see the movie? → Yes, I did. / No, I didn't.</span><button class="tts-btn" data-text="Did you see the movie? → Yes, I did. / No, I didn&#x27;t.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"What did you do last weekend?" → "I went hiking with my friends."</span><button class="tts-btn" data-text="&quot;What did you do last weekend?&quot; → &quot;I went hiking with my friends.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Where did you go on vacation?" → "I went to Japan."</span><button class="tts-btn" data-text="&quot;Where did you go on vacation?&quot; → &quot;I went to Japan.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "I had a great time last night" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;I had a great time last night&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="5" class="h2">第 5 点：现在完成时（过去发生并影响现在）</h2>
+<p><strong>用法：</strong> 描述<strong>过去发生、但和现在有关</strong>的事（经验、结果、持续）</p>
+<p><strong>公式：</strong> 主语 + have / has + 过去分词</p>
+<div class="example-line"><span class="en-text">I have lived here for 5 years.（我住这 5 年了，还住着）</span><button class="tts-btn" data-text="I have lived here for 5 years.（我住这 5 年了，还住着）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">She has finished her homework.（她做完了，<strong>现在不做了</strong>）</span><button class="tts-btn" data-text="She has finished her homework.（她做完了，现在不做了）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Have you ever been to Paris?（你<strong>这辈子</strong>去过吗？）</span><button class="tts-btn" data-text="Have you ever been to Paris?（你这辈子去过吗？）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>常见时间标志词：</strong> ever（曾经）、never（从不）、already（已经）、yet（还）、just（刚刚）、recently（最近）、for（持续多久）、since（自从）</p>
+<p><strong>不规则过去分词（必背）：</strong></p>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="go → gone | come → come | see → seen | take → taken | give → given">🔊</button><span class="en">go → gone | come → come | see → seen | take → taken | give → given</span></div><div class="vocab-line"><button class="tts-btn" data-text="get → got → got | make → made | do → done | have → had | say → said">🔊</button><span class="en">get → got → got | make → made | do → done | have → had | say → said</span></div><div class="vocab-line"><button class="tts-btn" data-text="tell → told | think → thought | know → known | feel → felt | find → found">🔊</button><span class="en">tell → told | think → thought | know → known | feel → felt | find → found</span></div><div class="vocab-line"><button class="tts-btn" data-text="eat → eaten | drink → drunk | read → read | write → written | speak → spoken">🔊</button><span class="en">eat → eaten | drink → drunk | read → read | write → written | speak → spoken</span></div><div class="vocab-line"><button class="tts-btn" data-text="be → been">🔊</button><span class="en">be → been</span></div></div>
+<p><strong>否定：</strong> 主语 + haven't / hasn't + 过去分词</p>
+<p><strong>疑问：</strong> Have / Has + 主语 + 过去分词？</p>
+<p><strong>与一般过去时的区别：</strong></p>
+<div class="example-line"><span class="en-text">I lived in Beijing for 5 years.（我以前在北京住 5 年，<strong>现在不住</strong>了）</span><button class="tts-btn" data-text="I lived in Beijing for 5 years.（我以前在北京住 5 年，现在不住了）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I have lived in Beijing for 5 years.（我住这 5 年，<strong>现在还住</strong>）</span><button class="tts-btn" data-text="I have lived in Beijing for 5 years.（我住这 5 年，现在还住）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"Have you ever tried sushi?" → "Yes, I have. / No, I haven't."</span><button class="tts-btn" data-text="&quot;Have you ever tried sushi?&quot; → &quot;Yes, I have. / No, I haven&#x27;t.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I've been to London twice."</span><button class="tts-btn" data-text="&quot;I&#x27;ve been to London twice.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I haven't seen that movie yet."</span><button class="tts-btn" data-text="&quot;I haven&#x27;t seen that movie yet.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "I have just finished my work" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;I have just finished my work&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="6" class="h2">第 6 点：将来时（将来发生的事）</h2>
+<p><strong>用法：</strong> 描述<strong>将来</strong>要做的事</p>
+<h3 id="1-will" class="h3">方式 1：will + 动词原形（最常用）</h3>
+<div class="example-line"><span class="en-text">I will call you tomorrow.</span><button class="tts-btn" data-text="I will call you tomorrow.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It will rain tomorrow.</span><button class="tts-btn" data-text="It will rain tomorrow.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Will you come to the party? → Yes, I will.</span><button class="tts-btn" data-text="Will you come to the party? → Yes, I will.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="2-be-going-to" class="h3">方式 2：be going to + 动词原形（计划、打算）</h3>
+<div class="example-line"><span class="en-text">I am going to study abroad next year.</span><button class="tts-btn" data-text="I am going to study abroad next year.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">What are you going to do this weekend?</span><button class="tts-btn" data-text="What are you going to do this weekend?">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>区别：</strong></p>
+<div class="list-item">• will：临时决定、预测</div>
+<div class="list-item">• be going to：事先计划、打算</div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"What will you do this weekend?" → "I'll probably stay home."</span><button class="tts-btn" data-text="&quot;What will you do this weekend?&quot; → &quot;I&#x27;ll probably stay home.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I'm going to visit my parents next month."</span><button class="tts-btn" data-text="&quot;I&#x27;m going to visit my parents next month.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "We'll meet at 7 pm" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;We&#x27;ll meet at 7 pm&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="7" class="h2">第 7 点：情态动词（表达能力和意愿）</h2>
+<p><strong>最常用的 6 个：</strong></p>
+<h3 id="can-could" class="h3">can / could：能力、请求、可能</h3>
+<div class="example-line"><span class="en-text">I can speak English.（我会说英语）</span><button class="tts-btn" data-text="I can speak English.（我会说英语）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can you help me?（你能帮我吗？更礼貌：Could you help me?）</span><button class="tts-btn" data-text="Can you help me?（你能帮我吗？更礼貌：Could you help me?）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It could rain later.（可能会下雨）</span><button class="tts-btn" data-text="It could rain later.（可能会下雨）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="will-would" class="h3">will / would：意愿、请求</h3>
+<div class="example-line"><span class="en-text">I will help you.（我愿意帮你）</span><button class="tts-btn" data-text="I will help you.（我愿意帮你）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Would you like some coffee?（你想要咖啡吗？超常用）</span><button class="tts-btn" data-text="Would you like some coffee?（你想要咖啡吗？超常用）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Would you mind if I...?（你介意我...吗？）</span><button class="tts-btn" data-text="Would you mind if I...?（你介意我...吗？）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="should-must" class="h3">should / must：建议、必须</h3>
+<div class="example-line"><span class="en-text">You should see a doctor.（你应该看医生）</span><button class="tts-btn" data-text="You should see a doctor.（你应该看医生）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I must go now.（我必须走了）</span><button class="tts-btn" data-text="I must go now.（我必须走了）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="may-might" class="h3">may / might：可能、许可</h3>
+<div class="example-line"><span class="en-text">It may rain.（可能要下雨）</span><button class="tts-btn" data-text="It may rain.（可能要下雨）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">May I use your phone?（我能用你电话吗？）</span><button class="tts-btn" data-text="May I use your phone?（我能用你电话吗？）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"Could you speak more slowly, please?" → "Sure, no problem."</span><button class="tts-btn" data-text="&quot;Could you speak more slowly, please?&quot; → &quot;Sure, no problem.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Would you like something to drink?" → "Yes, I'd like a coffee."</span><button class="tts-btn" data-text="&quot;Would you like something to drink?&quot; → &quot;Yes, I&#x27;d like a coffee.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"You should try this restaurant, it's great."</span><button class="tts-btn" data-text="&quot;You should try this restaurant, it&#x27;s great.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "I can't find my keys" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;I can&#x27;t find my keys&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="8" class="h2">第 8 点：比较级和最高级</h2>
+<p><strong>公式：</strong></p>
+<div class="list-item">• 比较级：A + be + 比较级 + than + B</div>
+<div class="list-item">• 最高级：A + be + the + 最高级 + of/in + 范围</div>
+<p><strong>规则变化：</strong></p>
+<div class="list-item">• 一般加 er / est：tall → taller → tallest</div>
+<div class="list-item">• 以 e 结尾加 r / st：nice → nicer → nicest</div>
+<div class="list-item">• 辅音 + y 变 ier / iest：happy → happier → happiest</div>
+<div class="list-item">• 重读闭音节双写最后字母：big → bigger → biggest</div>
+<div class="list-item">• 双音节词前面加 more / most：beautiful → more beautiful → most beautiful</div>
+<p><strong>不规则（必背）：</strong></p>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="good / well → better → best">🔊</button><span class="en">good / well → better → best</span></div><div class="vocab-line"><button class="tts-btn" data-text="bad → worse → worst">🔊</button><span class="en">bad → worse → worst</span></div><div class="vocab-line"><button class="tts-btn" data-text="many / much → more → most">🔊</button><span class="en">many / much → more → most</span></div><div class="vocab-line"><button class="tts-btn" data-text="little → less → least">🔊</button><span class="en">little → less → least</span></div><div class="vocab-line"><button class="tts-btn" data-text="far → farther / further → farthest / furthest">🔊</button><span class="en">far → farther / further → farthest / furthest</span></div></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"This restaurant is better than that one."</span><button class="tts-btn" data-text="&quot;This restaurant is better than that one.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"She's the most talented person I know."</span><button class="tts-btn" data-text="&quot;She&#x27;s the most talented person I know.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Today is worse than yesterday."</span><button class="tts-btn" data-text="&quot;Today is worse than yesterday.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="9" class="h2">第 9 点：介词搭配（高频短语动词）</h2>
+<p>英语里很多动词和介词组合是固定搭配，必须整块记。</p>
+<h3 id="" class="h3">常用短语动词</h3>
+<div class="code-block vocab-block"><div class="vocab-line"><button class="tts-btn" data-text="look at 看 | look for 寻找 | look like 看起来像">🔊</button><span class="en">look at 看 | look for 寻找 | look like 看起来像</span></div><div class="vocab-line"><button class="tts-btn" data-text="look forward to 期待 | look up 查阅">🔊</button><span class="en">look forward to 期待 | look up 查阅</span></div><div class="vocab-line"><button class="tts-btn" data-text="listen to 听 | wait for 等待 | pay for 付钱">🔊</button><span class="en">listen to 听 | wait for 等待 | pay for 付钱</span></div><div class="vocab-line"><button class="tts-btn" data-text="get up 起床 | get on 上车 | get off 下车 | get to 到达">🔊</button><span class="en">get up 起床 | get on 上车 | get off 下车 | get to 到达</span></div><div class="vocab-line"><button class="tts-btn" data-text="get along with 与...相处 | get used to 习惯于">🔊</button><span class="en">get along with 与...相处 | get used to 习惯于</span></div><div class="vocab-line"><button class="tts-btn" data-text="take off 起飞/脱下 | take out 拿出 | take care of 照顾">🔊</button><span class="en">take off 起飞/脱下 | take out 拿出 | take care of 照顾</span></div><div class="vocab-line"><button class="tts-btn" data-text="turn on 打开 | turn off 关闭 | turn down 调小/拒绝">🔊</button><span class="en">turn on 打开 | turn off 关闭 | turn down 调小/拒绝</span></div><div class="vocab-line"><button class="tts-btn" data-text="turn into 变成 | turn up 出现/调大">🔊</button><span class="en">turn into 变成 | turn up 出现/调大</span></div><div class="vocab-line"><button class="tts-btn" data-text="put on 穿上 | put off 推迟 | put away 放好">🔊</button><span class="en">put on 穿上 | put off 推迟 | put away 放好</span></div><div class="vocab-line"><button class="tts-btn" data-text="pick up 捡起/接人 | pick out 挑出">🔊</button><span class="en">pick up 捡起/接人 | pick out 挑出</span></div><div class="vocab-line"><button class="tts-btn" data-text="give up 放弃 | give in 妥协 | give back 归还">🔊</button><span class="en">give up 放弃 | give in 妥协 | give back 归还</span></div><div class="vocab-line"><button class="tts-btn" data-text="find out 查明 | figure out 弄明白">🔊</button><span class="en">find out 查明 | figure out 弄明白</span></div><div class="vocab-line"><button class="tts-btn" data-text="run out of 用完 | look after 照顾 | look over 检查">🔊</button><span class="en">run out of 用完 | look after 照顾 | look over 检查</span></div></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"I'm looking for a good restaurant. Do you have any recommendations?"</span><button class="tts-btn" data-text="&quot;I&#x27;m looking for a good restaurant. Do you have any recommendations?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I'll pick you up at 6 pm."</span><button class="tts-btn" data-text="&quot;I&#x27;ll pick you up at 6 pm.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Could you turn down the music a little?"</span><button class="tts-btn" data-text="&quot;Could you turn down the music a little?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "I can't figure out this problem" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;I can&#x27;t figure out this problem&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="10" class="h2">第 10 点：连词和从句</h2>
+<p><strong>目的：</strong> 把多个短句连成长句，让表达更自然。</p>
+<h3 id="" class="h3">时间连词</h3>
+<div class="example-line"><span class="en-text">when 当...时：I was reading when you called.</span><button class="tts-btn" data-text="when 当...时：I was reading when you called.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">while 当...时（持续）：While I was cooking, the phone rang.</span><button class="tts-btn" data-text="while 当...时（持续）：While I was cooking, the phone rang.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="list-item">• before / after / until / since</div>
+<h3 id="" class="h3">原因连词</h3>
+<div class="example-line"><span class="en-text">because 因为：I'm tired because I worked late.</span><button class="tts-btn" data-text="because 因为：I&#x27;m tired because I worked late.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">since 既然：Since you're here, let's start.</span><button class="tts-btn" data-text="since 既然：Since you&#x27;re here, let&#x27;s start.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">让步连词</h3>
+<div class="example-line"><span class="en-text">although / though 虽然：Although it rained, we had fun.</span><button class="tts-btn" data-text="although / though 虽然：Although it rained, we had fun.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="list-item">• even though 即使</div>
+<h3 id="" class="h3">条件连词</h3>
+<div class="example-line"><span class="en-text">if 如果：If it rains, I'll stay home.</span><button class="tts-btn" data-text="if 如果：If it rains, I&#x27;ll stay home.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">unless 除非：I'll go unless it rains.</span><button class="tts-btn" data-text="unless 除非：I&#x27;ll go unless it rains.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">宾语从句</h3>
+<div class="example-line"><span class="en-text">I think (that) he is right.</span><button class="tts-btn" data-text="I think (that) he is right.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">She said (that) she was tired.</span><button class="tts-btn" data-text="She said (that) she was tired.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Do you know what time it is?</span><button class="tts-btn" data-text="Do you know what time it is?">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Can you tell me where the station is?</span><button class="tts-btn" data-text="Can you tell me where the station is?">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"I'll call you when I arrive."</span><button class="tts-btn" data-text="&quot;I&#x27;ll call you when I arrive.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Although I'm busy, I'll make time for you."</span><button class="tts-btn" data-text="&quot;Although I&#x27;m busy, I&#x27;ll make time for you.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"If you need help, just let me know."</span><button class="tts-btn" data-text="&quot;If you need help, just let me know.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "She said she would come later" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;She said she would come later&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="11-there-be" class="h2">第 11 点：there be 句型</h2>
+<p><strong>用法：</strong> 表达"某地有某物"</p>
+<p><strong>公式：</strong> There + be + 主语 + 地点/时间</p>
+<div class="example-line"><span class="en-text">There is a book on the table.</span><button class="tts-btn" data-text="There is a book on the table.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">There are two cats in the room.</span><button class="tts-btn" data-text="There are two cats in the room.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">There is going to be a meeting tomorrow.</span><button class="tts-btn" data-text="There is going to be a meeting tomorrow.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>疑问：</strong> Is / Are + there + 主语？</p>
+<div class="example-line"><span class="en-text">Is there a bank near here? → Yes, there is. / No, there isn't.</span><button class="tts-btn" data-text="Is there a bank near here? → Yes, there is. / No, there isn&#x27;t.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Are there any good restaurants? → Yes, there are.</span><button class="tts-btn" data-text="Are there any good restaurants? → Yes, there are.">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"Excuse me, is there a coffee shop nearby?"</span><button class="tts-btn" data-text="&quot;Excuse me, is there a coffee shop nearby?&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"There are 50 students in my class."</span><button class="tts-btn" data-text="&quot;There are 50 students in my class.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "There used to be a park here" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;There used to be a park here&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="12" class="h2">第 12 点：常用句型（口语必背）</h2>
+<h3 id="" class="h3">提建议 / 邀请</h3>
+<div class="example-line"><span class="en-text">Why don't you...? 你为什么不...？</span><button class="tts-btn" data-text="Why don&#x27;t you...? 你为什么不...？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">How about...? ...怎么样？</span><button class="tts-btn" data-text="How about...? ...怎么样？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Would you like to...? 你想...吗？</span><button class="tts-btn" data-text="Would you like to...? 你想...吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Let's... 让我们...吧。</span><button class="tts-btn" data-text="Let&#x27;s... 让我们...吧。">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Shall we...? 我们...好吗？</span><button class="tts-btn" data-text="Shall we...? 我们...好吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">表达意见</h3>
+<div class="example-line"><span class="en-text">I think... / I don't think...</span><button class="tts-btn" data-text="I think... / I don&#x27;t think...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">In my opinion, ...</span><button class="tts-btn" data-text="In my opinion, ...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">As far as I'm concerned, ...</span><button class="tts-btn" data-text="As far as I&#x27;m concerned, ...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">It seems to me that...</span><button class="tts-btn" data-text="It seems to me that...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">请求许可</h3>
+<div class="example-line"><span class="en-text">Can I...? 我能...吗？</span><button class="tts-btn" data-text="Can I...? 我能...吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">May I...? 我可以...吗？</span><button class="tts-btn" data-text="May I...? 我可以...吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Do you mind if I...? 你介意我...吗？</span><button class="tts-btn" data-text="Do you mind if I...? 你介意我...吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">Is it okay if I...? ...可以吗？</span><button class="tts-btn" data-text="Is it okay if I...? ...可以吗？">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">表示喜欢 / 不喜欢</h3>
+<div class="list-item">• I love / like / enjoy + doing</div>
+<div class="example-line"><span class="en-text">I'm fond of...</span><button class="tts-btn" data-text="I&#x27;m fond of...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm crazy about...（口语）</span><button class="tts-btn" data-text="I&#x27;m crazy about...（口语）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I'm not a big fan of...（委婉）</span><button class="tts-btn" data-text="I&#x27;m not a big fan of...（委婉）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I can't stand...（受不了）</span><button class="tts-btn" data-text="I can&#x27;t stand...（受不了）">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I hate...</span><button class="tts-btn" data-text="I hate...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">描述经历</h3>
+<div class="example-line"><span class="en-text">I have been to... 我去过...</span><button class="tts-btn" data-text="I have been to... 我去过...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I have tried... 我试过...</span><button class="tts-btn" data-text="I have tried... 我试过...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I have never... 我从未...</span><button class="tts-btn" data-text="I have never... 我从未...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">I once... 我曾经...</span><button class="tts-btn" data-text="I once... 我曾经...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="" class="h3">表达频率</h3>
+<div class="list-item">• always 总是 | usually 通常 | often 经常</div>
+<div class="list-item">• sometimes 有时 | rarely 很少 | never 从不</div>
+<div class="list-item">• every day 每天 | once a week 一周一次</div>
+<div class="list-item">• from time to time 偶尔</div>
+<p><strong>听说训练：</strong></p>
+<div class="example-line"><span class="en-text">"Would you like to join us for dinner?" → "Sure, I'd love to."</span><button class="tts-btn" data-text="&quot;Would you like to join us for dinner?&quot; → &quot;Sure, I&#x27;d love to.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"Can I ask you a question?" → "Of course, go ahead."</span><button class="tts-btn" data-text="&quot;Can I ask you a question?&quot; → &quot;Of course, go ahead.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">"I'm not a big fan of spicy food."</span><button class="tts-btn" data-text="&quot;I&#x27;m not a big fan of spicy food.&quot;">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<div class="example-line"><span class="en-text">听到 "Why don't we go for a walk?" 能秒懂</span><button class="tts-btn" data-text="听到 &quot;Why don&#x27;t we go for a walk?&quot; 能秒懂">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<hr>
+<h2 id="" class="h2">学习顺序与时间分配</h2>
+<p>| 周次 | 学习内容 | 重点听说训练 | |------|---------|-------------| | 第 1 周 | 第 1-3 点：be 动词、一般现在、现在进行 | 用 5W1H 问问题并回答 | | 第 2 周 | 第 4-5 点：一般过去、现在完成 | 描述过去经历、分享最近的事 | | 第 3 周 | 第 6-7 点：将来、情态动词 | 表达计划、提建议、礼貌请求 | | 第 4 周 | 第 8-9 点：比较级、短语动词 | 描述事物、做对比、口语化表达 | | 第 5 周 | 第 10-11 点：连词从句、there be | 表达因果、描述地点 | | 第 6 周 | 第 12 点：常用句型 | 综合场景对话 |</p>
+<hr>
+<h2 id="" class="h2">核心学习方法</h2>
+<h3 id="1" class="h3">1. 学语法不要"看书"——要"造句"</h3>
+<p>学一个时态，<strong>立刻用这个时态说 5 句关于自己的话</strong>：</p>
+<div class="example-line"><span class="en-text">学现在进行时：I am reading, I am working, I am learning...</span><button class="tts-btn" data-text="学现在进行时：I am reading, I am working, I am learning...">🔊</button><span class="cn-hint">点击 👁️ 看中文</span></div>
+<h3 id="2" class="h3">2. 配听说训练</h3>
+<p>每个语法点配：</p>
+<div class="list-item">• 听：3 段使用该语法的音频</div>
+<div class="list-item">• 说：用这个语法造 5 个句子并录音</div>
+<h3 id="3" class="h3">3. 错也要说</h3>
+<p>口语里语法错 10% 不影响交流，老外自己也会犯。<strong>先流利，后准确</strong>。</p>
+<h3 id="4" class="h3">4. 跟读训练</h3>
+<div class="list-item">• 找一段 1 分钟英语（Podcast、YouTube）</div>
+<div class="list-item">• 第 1 遍：听意思</div>
+<div class="list-item">• 第 2 遍：听每一句的语法结构</div>
+<div class="list-item">• 第 3 遍：暂停跟读</div>
+<div class="list-item">• 第 4 遍：影子跟读（与原音同时说）</div>
+<div class="list-item">• 第 5 遍：录音对比</div>
+<h3 id="5" class="h3">5. 推荐教材（任选一本）</h3>
+<div class="list-item">• <strong>《赖世雄美语从头学》</strong>：中文讲解，零基础友好</div>
+<div class="list-item">• <strong>新概念英语第 1-2 册</strong>：经典老牌，课文短小精悍</div>
+<div class="list-item">• <strong>English Grammar in Use</strong>：剑桥出的语法书，例句地道</div>
+<div class="list-item">• <strong>《剑桥英语语法》</strong>：中文版，分级清晰</div>
+<h3 id="6" class="h3">6. 检验标准</h3>
+<div class="list-item">• 看到句型能立刻反应中文意思</div>
+<div class="list-item">• 给中文 5 秒能说出英文</div>
+<div class="list-item">• 听一段对话能识别出用了哪个语法</div>
+<div class="list-item">• 录音自己的句子，老外能听懂</div>
+  </main>
+</div>
+
+<script>
+// 复习模式
+const reviewBtn = document.getElementById('review-toggle');
+reviewBtn.addEventListener('click', () => {
+  document.body.classList.toggle('review-mode');
+  reviewBtn.classList.toggle('active');
+});
+
+// 深色模式
+const darkBtn = document.getElementById('dark-toggle');
+const themeKey = 'education-hub:english:grammar:theme';
+const legacyThemeKey = 'theme';
+const savedTheme = localStorage.getItem(themeKey) || localStorage.getItem(legacyThemeKey);
+if (!localStorage.getItem(themeKey) && savedTheme) localStorage.setItem(themeKey, savedTheme);
+if (savedTheme === 'dark') document.documentElement.setAttribute('data-theme', 'dark');
+darkBtn.addEventListener('click', () => {
+  const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  document.documentElement.setAttribute('data-theme', isDark ? '' : 'dark');
+  localStorage.setItem(themeKey, isDark ? 'light' : 'dark');
+  darkBtn.classList.toggle('active');
+});
+if (savedTheme === 'dark') darkBtn.classList.add('active');
+
+// TTS 朗读
+function speak(text, btn) {
+  if (!('speechSynthesis' in window)) {
+    alert('您的浏览器不支持朗读功能');
+    return;
+  }
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US';
+  u.rate = 0.9;
+  if (btn) btn.classList.add('playing');
+  u.onend = u.onerror = () => { if (btn) btn.classList.remove('playing'); };
+  window.speechSynthesis.speak(u);
+}
+
+document.addEventListener('click', e => {
+  if (e.target.classList.contains('tts-btn')) {
+    speak(e.target.dataset.text, e.target);
+  }
+});
+
+document.getElementById('tts-all').addEventListener('click', () => {
+  const all = document.querySelectorAll('.vocab-line .en, .example-line .en-text, .en-text, p');
+  let i = 0;
+  function next() {
+    if (i >= all.length) return;
+    const el = all[i++];
+    const text = el.textContent.trim();
+    if (text.length > 5 && text.length < 200) {
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'en-US';
+      u.rate = 0.9;
+      u.onend = next;
+      window.speechSynthesis.speak(u);
+    } else {
+      next();
+    }
+  }
+  next();
+});
+
+// 章节折叠
+document.querySelectorAll('h2, h3').forEach(h => {
+  h.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') return;
+    let next = h.nextElementSibling;
+    h.classList.toggle('collapsed');
+    const collapsed = h.classList.contains('collapsed');
+    while (next && !['H1','H2','H3'].includes(next.tagName)) {
+      next.style.display = collapsed ? 'none' : '';
+      next = next.nextElementSibling;
+    }
+  });
+});
+
+// 学习进度
+const sectionKey = 'education-hub:english:grammar:progress';
+const legacySectionKey = 'progress-/lemon_english/grammar.html';
+const savedProgress = localStorage.getItem(sectionKey) || localStorage.getItem(legacySectionKey) || '{}';
+if (!localStorage.getItem(sectionKey) && savedProgress !== '{}') localStorage.setItem(sectionKey, savedProgress);
+const saved = JSON.parse(savedProgress);
+const allH2 = document.querySelectorAll('h2');
+allH2.forEach(h => {
+  if (saved[h.id]) h.classList.add('checked');
+  h.addEventListener('dblclick', (e) => {
+    e.preventDefault();
+    h.classList.toggle('checked');
+    const cur = JSON.parse(localStorage.getItem(sectionKey) || '{}');
+    cur[h.id] = h.classList.contains('checked');
+    localStorage.setItem(sectionKey, JSON.stringify(cur));
+    updateProgress();
+  });
+  h.title = '双击标记为已学';
+});
+
+function updateProgress() {
+  const total = allH2.length;
+  const done = document.querySelectorAll('h2.checked').length;
+  document.getElementById('progress-fill').style.width = (done/total*100) + '%';
+  document.getElementById('progress-text').textContent = done + ' / ' + total;
+}
+updateProgress();
+
+// 目录点击
+document.querySelectorAll('.toc a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.getElementById(a.dataset.target);
+    if (target) {
+      target.classList.remove('collapsed');
+      let next = target.nextElementSibling;
+      while (next && !['H1','H2','H3'].includes(next.tagName)) {
+        next.style.display = '';
+        next = next.nextElementSibling;
+      }
+      target.scrollIntoView({behavior: 'smooth', block: 'start'});
+    }
+  });
+});
+
+// 键盘快捷键
+document.addEventListener('keydown', e => {
+  if (e.key === 'd' && !e.target.matches('input,textarea')) darkBtn.click();
+  if (e.key === 'r' && !e.target.matches('input,textarea')) reviewBtn.click();
+});
+</script>
+</body>
+</html>
